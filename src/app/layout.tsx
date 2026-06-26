@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Inter } from "next/font/google";
 import { Playfair_Display } from "next/font/google";
 import "./globals.css";
@@ -99,6 +100,7 @@ export default function RootLayout({
         <Footer />
         <FloatingCallButton />
       </body>
+      <GoogleAnalytics gaId="G-8GCDDCY1E1" />
     </html>
   );
 }
