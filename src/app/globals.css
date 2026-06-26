@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest: #1B4332;
+  --color-forest-dark: #0F2B1E;
+  --color-forest-light: #2D6A4F;
+  --color-lime: #7DC143;
+  --color-lime-light: #9ED46B;
+  --color-lime-dark: #5E9A30;
+  --color-cream: #F8F7F4;
+  --color-soft-gray: #F2F2F0;
+  --color-warm-white: #FAFAF8;
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-playfair);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-forest antialiased;
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair), Georgia, serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .section-padding {
+    @apply py-20 px-6 md:px-12 lg:px-20;
+  }
+
+  .container-max {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-lime text-white font-semibold px-8 py-4 rounded-sm
+           hover:bg-lime-dark transition-all duration-300 tracking-wide text-sm uppercase;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border-2 border-white text-white font-semibold px-8 py-4 rounded-sm
+           hover:bg-white hover:text-forest transition-all duration-300 tracking-wide text-sm uppercase;
+  }
+
+  .btn-outline-dark {
+    @apply inline-flex items-center gap-2 border-2 border-forest text-forest font-semibold px-8 py-4 rounded-sm
+           hover:bg-forest hover:text-white transition-all duration-300 tracking-wide text-sm uppercase;
+  }
+
+  .label-tag {
+    @apply inline-block text-lime font-semibold text-xs tracking-[0.2em] uppercase mb-4;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold text-forest leading-tight;
+    font-family: var(--font-playfair), Georgia, serif;
+  }
+
+  .section-subtitle {
+    @apply text-gray-600 text-lg leading-relaxed mt-4;
+  }
+}
