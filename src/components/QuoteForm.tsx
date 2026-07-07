@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { trackLeadConversion } from "@/lib/gtag";
 
 export default function QuoteForm({ dark = false }: { dark?: boolean }) {
   const router = useRouter();
@@ -38,6 +39,7 @@ export default function QuoteForm({ dark = false }: { dark?: boolean }) {
         throw new Error(data.error ?? "Something went wrong. Please try again.");
       }
 
+      trackLeadConversion();
       router.push("/thank-you");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
