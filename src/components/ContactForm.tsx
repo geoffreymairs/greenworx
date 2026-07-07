@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { trackLeadConversion } from "@/lib/gtag";
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/heic", "image/heif"];
 const ACCEPTED_EXTS  = [".jpg", ".jpeg", ".png", ".heic", ".heif"];
@@ -105,6 +106,7 @@ export default function ContactForm() {
         throw new Error(data.error ?? "Something went wrong. Please try again.");
       }
 
+      trackLeadConversion();
       router.push("/thank-you");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { Inter } from "next/font/google";
 import { Playfair_Display } from "next/font/google";
@@ -102,6 +103,19 @@ export default function RootLayout({
         <FloatingCallButton />
       </body>
       <GoogleAnalytics gaId="G-8GCDDCY1E1" />
+      <Script
+        id="google-ads-gtag"
+        src="https://www.googletagmanager.com/gtag/js?id=AW-18271010524"
+        strategy="afterInteractive"
+      />
+      <Script id="google-ads-config" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-18271010524');
+        `}
+      </Script>
     </html>
   );
 }
