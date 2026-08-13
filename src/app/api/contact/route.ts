@@ -1,5 +1,13 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import {
+  runSpamChecks,
+  getClientIp,
+  sanitizeField,
+  logBlockedSubmission,
+  SPAM_REJECTION_MESSAGE,
+  MAX_LEN,
+} from "@/lib/antispam";
 
 const DEVON = "devon@greenworx.co.nz";
 const FROM  = "Greenworx Landscaping <noreply@greenworx.co.nz>";
@@ -264,10 +272,36 @@ function confirmationHtml(name: string, address: string, details: string) {
 </body></html>`;
 }
 
-// ─── Route handler ────────────────────────────────────────────────────────────
+// ─── Route handler ─────────────────────────────────────────────────��──────────
 
 export async function POST(req: Request) {
   try {
+    const formData = await req.formData();
+
+    const name    = sanitizeField(formData.get("name")?.toString()    ?? "", MAX_LEN.name);
+    const phone   = sanitizeField(formData.get("phone")?.toString()   ?? "", MAX_LEN.phone);
+    const email   = sanitizeField(formData.get("email")?.toString()   ?? "", MAX_LEN.email);
+    const address = sanitizeField(formData.get("address")?.toString() ?? "", MAX_LEN.address);
+    const details = sanitizeField(formData.get("details")?.toString() ?? "", MAX_LEN.details);
+
+    // ── Anti-spam gate — runs FIRST, before photos, email or Fergus call ──────
+    const ip = getClientIp(req);
+    const elapsedRaw = formData.get("elapsedMs")?.toString();
+    const spam = runSpamChecks({
+      ip,
+      formName: "contact",
+      honeypot: formData.get("company")?.toString(),
+      elapsedMs: elapsedRaw ? Number(elapsedRaw) : null,
+      fields: { name, phone, email, address, details },
+      required: ["name", "phone", "email", "address"],
+    });
+
+    if (!spam.ok) {
+      logBlockedSubmission("contact", spam.reason ?? "unknown", ip);
+      return NextResponse.json({ error: SPAM_REJECTION_MESSAGE }, { status: 400 });
+    }
+    // ── End anti-spam gate — everything below is the existing flow, unchanged ──
+
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
       console.error("[Contact] RESEND_API_KEY is not set.");
@@ -278,19 +312,6 @@ export async function POST(req: Request) {
     }
 
     const resend = new Resend(apiKey);
-
-    const formData = await req.formData();
-
-    const name    = formData.get("name")?.toString()    ?? "";
-    const phone   = formData.get("phone")?.toString()   ?? "";
-    const email   = formData.get("email")?.toString()   ?? "";
-    const address = formData.get("address")?.toString() ?? "";
-    const details = formData.get("details")?.toString() ?? "";
-
-    // Validate required fields
-    if (!name || !phone || !email || !address) {
-      return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
-    }
 
     // Process photo attachments
     const rawPhotos = formData.getAll("photos") as File[];

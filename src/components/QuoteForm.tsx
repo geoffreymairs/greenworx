@@ -3,11 +3,14 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { trackLeadConversion } from "@/lib/gtag";
+import { useAntiSpam } from "@/lib/useAntiSpam";
+import HoneypotField from "@/components/HoneypotField";
 
 export default function QuoteForm({ dark = false }: { dark?: boolean }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { honeypot, setHoneypot, getElapsedMs } = useAntiSpam();
 
   const [name, setName]       = useState("");
   const [phone, setPhone]     = useState("");
@@ -31,7 +34,7 @@ export default function QuoteForm({ dark = false }: { dark?: boolean }) {
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, email, address, details }),
+        body: JSON.stringify({ name, phone, email, address, details, company: honeypot, elapsedMs: getElapsedMs() }),
       });
 
       if (!res.ok) {
@@ -50,6 +53,7 @@ export default function QuoteForm({ dark = false }: { dark?: boolean }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      <HoneypotField value={honeypot} onChange={setHoneypot} />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className={labelClass}>Full Name *</label>

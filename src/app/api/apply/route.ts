@@ -1,11 +1,45 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import {
+  runSpamChecks,
+  getClientIp,
+  sanitizeField,
+  logBlockedSubmission,
+  SPAM_REJECTION_MESSAGE,
+  MAX_LEN,
+} from "@/lib/antispam";
 
 const TO = "devon@greenworx.co.nz";
 const FROM = "Greenworx Landscaping <noreply@greenworx.co.nz>";
 
 export async function POST(req: Request) {
   try {
+    const formData = await req.formData();
+
+    const name       = sanitizeField(formData.get("name")?.toString() ?? "", MAX_LEN.name);
+    const phone      = sanitizeField(formData.get("phone")?.toString() ?? "", MAX_LEN.phone);
+    const email      = sanitizeField(formData.get("email")?.toString() ?? "", MAX_LEN.email);
+    const experience = sanitizeField(formData.get("experience")?.toString() ?? "", MAX_LEN.experience);
+    const cvFile     = formData.get("cv") as File | null;
+
+    // ── Anti-spam gate — runs FIRST, before any email is sent ─────────────────
+    const ip = getClientIp(req);
+    const elapsedRaw = formData.get("elapsedMs")?.toString();
+    const spam = runSpamChecks({
+      ip,
+      formName: "apply",
+      honeypot: formData.get("company")?.toString(),
+      elapsedMs: elapsedRaw ? Number(elapsedRaw) : null,
+      fields: { name, phone, email, experience },
+      required: ["name", "phone", "email", "experience"],
+    });
+
+    if (!spam.ok) {
+      logBlockedSubmission("apply", spam.reason ?? "unknown", ip);
+      return NextResponse.json({ error: SPAM_REJECTION_MESSAGE }, { status: 400 });
+    }
+    // ── End anti-spam gate — everything below is the existing flow, unchanged ──
+
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
       console.error("Apply route error: RESEND_API_KEY is not set.");
@@ -16,18 +50,6 @@ export async function POST(req: Request) {
     }
 
     const resend = new Resend(apiKey);
-
-    const formData = await req.formData();
-
-    const name       = formData.get("name")?.toString() ?? "";
-    const phone      = formData.get("phone")?.toString() ?? "";
-    const email      = formData.get("email")?.toString() ?? "";
-    const experience = formData.get("experience")?.toString() ?? "";
-    const cvFile     = formData.get("cv") as File | null;
-
-    if (!name || !phone || !email || !experience) {
-      return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
-    }
 
     // Build optional CV attachment
     const attachments: { filename: string; content: Buffer }[] = [];
