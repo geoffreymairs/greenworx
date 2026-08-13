@@ -1,5 +1,13 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import {
+  runSpamChecks,
+  getClientIp,
+  sanitizeField,
+  logBlockedSubmission,
+  SPAM_REJECTION_MESSAGE,
+  MAX_LEN,
+} from "@/lib/antispam";
 
 const DEVON = "devon@greenworx.co.nz";
 const FROM  = "Greenworx Landscaping <noreply@greenworx.co.nz>";
@@ -256,6 +264,31 @@ function confirmationHtml(name: string, address: string, details: string) {
 // ─── Route handler ────────────────────────────────────────────────────────────
 export async function POST(req: Request) {
   try {
+    const body = await req.json();
+
+    // ── Anti-spam gate — runs FIRST, before any email or Fergus call ──────────
+    const ip = getClientIp(req);
+    const name    = sanitizeField(String(body.name    ?? ""), MAX_LEN.name);
+    const phone   = sanitizeField(String(body.phone   ?? ""), MAX_LEN.phone);
+    const email   = sanitizeField(String(body.email   ?? ""), MAX_LEN.email);
+    const address = sanitizeField(String(body.address ?? ""), MAX_LEN.address);
+    const details = sanitizeField(String(body.details ?? ""), MAX_LEN.details);
+
+    const spam = runSpamChecks({
+      ip,
+      formName: "quote",
+      honeypot: body.company,
+      elapsedMs: typeof body.elapsedMs === "number" ? body.elapsedMs : null,
+      fields: { name, phone, email, address, details },
+      required: ["name", "phone", "email"],
+    });
+
+    if (!spam.ok) {
+      logBlockedSubmission("quote", spam.reason ?? "unknown", ip);
+      return NextResponse.json({ error: SPAM_REJECTION_MESSAGE }, { status: 400 });
+    }
+    // ── End anti-spam gate — everything below is the existing flow, unchanged ──
+
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
       console.error("[Quote] RESEND_API_KEY is not set.");
@@ -266,12 +299,6 @@ export async function POST(req: Request) {
     }
 
     const resend = new Resend(apiKey);
-
-    const { name, phone, email, address, details } = await req.json();
-
-    if (!name || !phone || !email) {
-      return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
-    }
 
     // Send both emails in parallel — allSettled so a confirmation failure
     // never blocks Devon's notification from going through.

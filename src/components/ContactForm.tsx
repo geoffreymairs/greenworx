@@ -3,6 +3,8 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { trackLeadConversion } from "@/lib/gtag";
+import { useAntiSpam } from "@/lib/useAntiSpam";
+import HoneypotField from "@/components/HoneypotField";
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/heic", "image/heif"];
 const ACCEPTED_EXTS  = [".jpg", ".jpeg", ".png", ".heic", ".heif"];
@@ -23,6 +25,7 @@ export default function ContactForm() {
   const router = useRouter();
   const [loading, setLoading]     = useState(false);
   const [error, setError]         = useState<string | null>(null);
+  const { honeypot, setHoneypot, getElapsedMs } = useAntiSpam();
 
   const [name, setName]       = useState("");
   const [phone, setPhone]     = useState("");
@@ -97,6 +100,8 @@ export default function ContactForm() {
       fd.append("email",   email);
       fd.append("address", address);
       fd.append("details", details);
+      fd.append("company", honeypot);
+      fd.append("elapsedMs", String(getElapsedMs()));
       photos.forEach(({ file }) => fd.append("photos", file));
 
       const res = await fetch("/api/contact", { method: "POST", body: fd });
@@ -119,6 +124,8 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+
+      <HoneypotField value={honeypot} onChange={setHoneypot} />
 
       {/* Name + Phone */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

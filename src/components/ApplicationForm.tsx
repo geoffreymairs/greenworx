@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useAntiSpam } from "@/lib/useAntiSpam";
+import HoneypotField from "@/components/HoneypotField";
 
 export default function ApplicationForm() {
+  const { honeypot, setHoneypot, getElapsedMs } = useAntiSpam();
   const [submitted, setSubmitted]   = useState(false);
   const [loading, setLoading]       = useState(false);
   const [error, setError]           = useState<string | null>(null);
@@ -36,6 +39,8 @@ export default function ApplicationForm() {
       fd.append("phone", phone);
       fd.append("email", email);
       fd.append("experience", experience);
+      fd.append("company", honeypot);
+      fd.append("elapsedMs", String(getElapsedMs()));
       if (cvFile) fd.append("cv", cvFile);
 
       const res = await fetch("/api/apply", { method: "POST", body: fd });
@@ -76,6 +81,7 @@ export default function ApplicationForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      <HoneypotField value={honeypot} onChange={setHoneypot} />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className={labelClass}>Full Name *</label>
