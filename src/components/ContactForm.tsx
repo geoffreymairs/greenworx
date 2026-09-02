@@ -8,8 +8,10 @@ import HoneypotField from "@/components/HoneypotField";
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/heic", "image/heif"];
 const ACCEPTED_EXTS  = [".jpg", ".jpeg", ".png", ".heic", ".heif"];
-const MAX_FILE_BYTES = 20 * 1024 * 1024; // 20 MB per file
-const MAX_FILES      = 10;
+const MAX_FILE_BYTES  = 20 * 1024 * 1024; // 20 MB per file
+const MAX_TOTAL_BYTES = 20 * 1024 * 1024; // 20 MB total across all photos
+const MAX_FILES       = 10;
+const CONTACT_EMAIL   = "devon@greenworx.co.nz";
 
 interface PhotoFile {
   file: File;
@@ -60,14 +62,32 @@ export default function ContactForm() {
       valid.push({ file, id: crypto.randomUUID() });
     }
 
-    setPhotos((prev) => {
-      const combined = [...prev, ...valid];
-      if (combined.length > MAX_FILES) {
-        errors.push(`Maximum ${MAX_FILES} photos allowed. Only the first ${MAX_FILES} were kept.`);
-        return combined.slice(0, MAX_FILES);
+    let combined = [...photos, ...valid];
+
+    if (combined.length > MAX_FILES) {
+      errors.push(`Maximum ${MAX_FILES} photos allowed. Only the first ${MAX_FILES} were kept.`);
+      combined = combined.slice(0, MAX_FILES);
+    }
+
+    // Enforce a 20 MB total cap across all photos
+    const kept: PhotoFile[] = [];
+    let runningTotal = 0;
+    let droppedForTotal = false;
+    for (const item of combined) {
+      if (runningTotal + item.file.size > MAX_TOTAL_BYTES) {
+        droppedForTotal = true;
+        continue;
       }
-      return combined;
-    });
+      runningTotal += item.file.size;
+      kept.push(item);
+    }
+    if (droppedForTotal) {
+      errors.push(
+        `Photos must total 20 MB or less (roughly 3–5 images). Some photos weren't added — if you have more, please email them to ${CONTACT_EMAIL}.`
+      );
+    }
+
+    setPhotos(kept);
 
     if (errors.length) setError(errors.join(" "));
     else setError(null);
@@ -204,8 +224,13 @@ export default function ContactForm() {
             </svg>
           </div>
           <p className="text-sm font-medium text-[#1B4332]">Click to upload or drag and drop</p>
-          <p className="text-xs text-gray-400 mt-1">JPG, PNG, HEIC, HEIF &mdash; max 20 MB per photo</p>
+          <p className="text-xs text-gray-400 mt-1">JPG, PNG, HEIC, HEIF &mdash; 20 MB total (about 3&ndash;5 photos)</p>
         </label>
+
+        <p className="text-xs text-gray-400 mt-2">
+          Got more photos than that? Email them to{" "}
+          <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#7DC143] hover:underline">{CONTACT_EMAIL}</a>.
+        </p>
 
         {/* Photo preview list */}
         {photos.length > 0 && (
