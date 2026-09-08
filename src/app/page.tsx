@@ -448,7 +448,7 @@ export default function HomePage() {
       <section className="relative py-28 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/remuera-garden.png"
+            src="/remuera-garden.webp"
             alt="Beautiful Auckland garden"
             fill
             className="object-cover"

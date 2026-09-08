@@ -19,7 +19,7 @@ const projects = [
       "The existing garden had poor drainage, ageing retaining structures and no cohesive design language — requiring a full redesign from the ground up.",
     solution:
       "Greenworx delivered a comprehensive redesign including new retaining walls, improved drainage, an expansive entertaining area and a carefully considered planting scheme of natives and exotics.",
-    img: "/remuera-garden.png",
+    img: "/remuera-garden.webp",
   },
   {
     title: "St Heliers Coastal Garden",
@@ -31,7 +31,7 @@ const projects = [
       "Salt-laden coastal winds and challenging soil conditions required careful species selection and structural solutions to create a garden that could truly thrive.",
     solution:
       "Greenworx designed and installed a wind-resilient planting scheme of coastal-tolerant natives, combined with premium stone paving and a timber entertaining deck oriented to maximise sea views.",
-    img: "/remuera-garden.png",
+    img: "/remuera-garden.webp",
   },
   {
     title: "Glendowie Outdoor Living",
@@ -43,7 +43,7 @@ const projects = [
       "The clients needed a practical, beautiful outdoor space that would work for family life and adult entertaining — while maintaining privacy from neighbouring properties.",
     solution:
       "Greenworx designed and built a multi-level hardwood deck with integrated seating, a natural stone-paved courtyard, and a custom timber screen providing privacy without sacrificing light.",
-    img: "/remuera-garden.png",
+    img: "/remuera-garden.webp",
   },
 ];
 
