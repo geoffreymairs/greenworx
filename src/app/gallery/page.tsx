@@ -11,18 +11,18 @@ export const metadata: Metadata = {
 const categories = ["All", "Landscape Design", "Construction", "Decking", "Paving", "Planting", "Maintenance", "Commercial"];
 
 const gallery = [
-  { img: "/remuera-garden.png", category: "Construction", title: "Remuera Garden Build" },
-  { img: "/remuera-garden.png", category: "Planting", title: "Kohimarama Native Garden" },
-  { img: "/remuera-garden.png", category: "Landscape Design", title: "St Heliers Coastal Design" },
-  { img: "/remuera-garden.png", category: "Decking", title: "Glendowie Entertainment Deck" },
-  { img: "/remuera-garden.png", category: "Paving", title: "Parnell Courtyard Paving" },
-  { img: "/remuera-garden.png", category: "Commercial", title: "Commercial Grounds" },
-  { img: "/remuera-garden.png", category: "Paving", title: "Remuera Stone Pathway" },
-  { img: "/remuera-garden.png", category: "Maintenance", title: "Epsom Garden Maintenance" },
-  { img: "/remuera-garden.png", category: "Planting", title: "Mission Bay Planting" },
-  { img: "/remuera-garden.png", category: "Landscape Design", title: "Orakei Garden Design" },
-  { img: "/remuera-garden.png", category: "Decking", title: "Meadowbank Pool Deck" },
-  { img: "/remuera-garden.png", category: "Construction", title: "Mt Eden Retaining Wall" },
+  { img: "/remuera-garden.webp", category: "Construction", title: "Remuera Garden Build" },
+  { img: "/remuera-garden.webp", category: "Planting", title: "Kohimarama Native Garden" },
+  { img: "/remuera-garden.webp", category: "Landscape Design", title: "St Heliers Coastal Design" },
+  { img: "/remuera-garden.webp", category: "Decking", title: "Glendowie Entertainment Deck" },
+  { img: "/remuera-garden.webp", category: "Paving", title: "Parnell Courtyard Paving" },
+  { img: "/remuera-garden.webp", category: "Commercial", title: "Commercial Grounds" },
+  { img: "/remuera-garden.webp", category: "Paving", title: "Remuera Stone Pathway" },
+  { img: "/remuera-garden.webp", category: "Maintenance", title: "Epsom Garden Maintenance" },
+  { img: "/remuera-garden.webp", category: "Planting", title: "Mission Bay Planting" },
+  { img: "/remuera-garden.webp", category: "Landscape Design", title: "Orakei Garden Design" },
+  { img: "/remuera-garden.webp", category: "Decking", title: "Meadowbank Pool Deck" },
+  { img: "/remuera-garden.webp", category: "Construction", title: "Mt Eden Retaining Wall" },
 ];
 
 export default function GalleryPage() {
