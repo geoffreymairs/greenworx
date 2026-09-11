@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { put } from "@vercel/blob";
 import { Resend } from "resend";
 import type { VerifiedAddress } from "@/lib/address";
 import {
@@ -89,7 +90,7 @@ function devonHtml(
   email: string,
   address: string,
   details: string,
-  photoCount: number,
+  photoLinks: { filename: string; url: string }[],
 ) {
   return `
 <!DOCTYPE html>
@@ -104,7 +105,7 @@ function devonHtml(
         <p style="margin:0 0 2px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#7DC143">Greenworx Landscaping</p>
         <h1 style="margin:0;font-family:Georgia,serif;font-size:22px;font-weight:700;color:white">New Quote Request</h1>
         <p style="margin:6px 0 0;font-family:Arial,sans-serif;font-size:12px;color:rgba(255,255,255,0.5)">
-          Submitted via greenworx.co.nz/contact &mdash; added to Fergus Enquiries${photoCount > 0 ? ` &mdash; ${photoCount} photo${photoCount > 1 ? "s" : ""} attached` : ""}
+          Submitted via greenworx.co.nz/contact &mdash; added to Fergus Enquiries${photoLinks.length > 0 ? ` &mdash; ${photoLinks.length} photo${photoLinks.length > 1 ? "s" : ""} available below` : ""}
         </p>
       </td></tr>
 
@@ -127,9 +128,9 @@ function devonHtml(
             <td style="padding:11px 0;border-bottom:1px solid #e5e5e3;font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#999">Property</td>
             <td style="padding:11px 0;border-bottom:1px solid #e5e5e3;font-family:Arial,sans-serif;font-size:15px;color:#1B4332">${address}</td>
           </tr>
-          ${photoCount > 0 ? `<tr>
+          ${photoLinks.length > 0 ? `<tr>
             <td style="padding:11px 0;border-bottom:1px solid #e5e5e3;font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#999">Photos</td>
-            <td style="padding:11px 0;border-bottom:1px solid #e5e5e3;font-family:Arial,sans-serif;font-size:15px;color:#1B4332">${photoCount} photo${photoCount > 1 ? "s" : ""} attached to this email</td>
+            <td style="padding:11px 0;border-bottom:1px solid #e5e5e3;font-family:Arial,sans-serif;font-size:15px;color:#1B4332">${photoLinks.map(({ filename, url }) => `<a href="${url}" style="display:block;color:#1B4332;text-decoration:underline;margin-bottom:6px">${filename}</a>`).join("")}</td>
           </tr>` : ""}
         </table>
         ${details ? `
@@ -365,6 +366,21 @@ export async function POST(req: Request) {
       });
     }
 
+    // Store photos as public, unguessable Blob URLs so Devon can open them directly from email.
+    const photoLinks: { filename: string; url: string }[] = [];
+    for (const attachment of attachments) {
+      try {
+        const blob = await put(
+          `contact-photos/${Date.now()}-${crypto.randomUUID()}-${attachment.filename.replace(/[^a-zA-Z0-9._-]/g, "-")}`,
+          attachment.content,
+          { access: "public", contentType: attachment.contentType, addRandomSuffix: false }
+        );
+        photoLinks.push({ filename: attachment.filename, url: blob.url });
+      } catch (error) {
+        console.error(`[Contact] Failed to upload photo ${attachment.filename} to Blob:`, error);
+      }
+    }
+
     // ── Send emails ───────────────────────────────────────────────────────────
     const [notification, confirmation] = await Promise.allSettled([
       resend.emails.send({
@@ -372,8 +388,7 @@ export async function POST(req: Request) {
         to:          DEVON,
         replyTo:     email,
         subject:     `New Quote Request — ${name}`,
-        html:        devonHtml(name, phone, email, address, `${details}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`, attachments.length),
-        attachments: attachments.map(({ filename, content }) => ({ filename, content })),
+        html:        devonHtml(name, phone, email, address, `${details}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`, photoLinks),
       }),
       resend.emails.send({
         from:    FROM,
