@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import type { VerifiedAddress } from "@/lib/address";
 import {
   runSpamChecks,
   getClientIp,
@@ -29,7 +30,7 @@ async function createFergusEnquiry(
   name: string,
   phone: string,
   email: string,
-  address: string,
+  verifiedAddress: VerifiedAddress,
   details: string,
 ): Promise<void> {
   const rawKey = process.env.FERGUS_API_KEY ?? "";
@@ -39,11 +40,8 @@ async function createFergusEnquiry(
     return;
   }
 
-  const addressParts = address.split(",").map((p) => p.trim());
-  const address1     = addressParts[0] || "Address not provided";
-  const addressCity  = addressParts.find((p) =>
-    /auckland|hamilton|wellington|christchurch|dunedin/i.test(p)
-  ) ?? "Auckland";
+  const address1 = verifiedAddress.formattedAddress || verifiedAddress.streetAddress || "Address not provided";
+  const addressCity = verifiedAddress.city || "Auckland";
 
   try {
     const res  = await fetch(`${FERGUS_BASE}/enquiries`, {
@@ -59,8 +57,14 @@ async function createFergusEnquiry(
         description:    details || "No project details provided.",
         source:         "contact_form",
         address1,
+        address2:        verifiedAddress.suburb || undefined,
         addressCity,
-        addressCountry: "New Zealand",
+        addressRegion:   verifiedAddress.region || undefined,
+        addressPostcode: verifiedAddress.postcode || undefined,
+        addressCountry:  verifiedAddress.country || "New Zealand",
+        addressPlaceId:  verifiedAddress.placeId || undefined,
+        latitude:        verifiedAddress.latitude ?? undefined,
+        longitude:       verifiedAddress.longitude ?? undefined,
       }),
     });
 
@@ -396,7 +400,24 @@ export async function POST(req: Request) {
     }
 
     // ── Create Fergus enquiry (non-fatal) ─────────────────────────────────────
-    await createFergusEnquiry(name, phone, email, address, `${details}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`);
+    await createFergusEnquiry(
+    name,
+    phone,
+    email,
+    {
+      formattedAddress: address,
+      placeId: addressPlaceId,
+      latitude: addressLatitude ? Number(addressLatitude) : null,
+      longitude: addressLongitude ? Number(addressLongitude) : null,
+      postcode: addressPostcode,
+      suburb: addressSuburb,
+      city: addressCity,
+      region: sanitizeField(formData.get("addressRegion")?.toString() ?? "", 100),
+      country: sanitizeField(formData.get("addressCountry")?.toString() ?? "", 100),
+      streetAddress: addressStreet,
+    },
+    `${details}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`
+  );
 
     return NextResponse.json({ success: true });
   } catch (err) {
