@@ -179,14 +179,13 @@ export default function HomePage() {
     <>
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[#0F2B1E]">
           <video
             className="h-full w-full object-cover"
             autoPlay
             loop
             muted
             playsInline
-            poster="/hero.webp"
             aria-label="Landscaped garden in Auckland"
           >
             <source src="/greenworx-hero-cinematic-1080p.mp4" type="video/mp4" />
