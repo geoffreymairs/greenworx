@@ -11,7 +11,7 @@ import { EMPTY_VERIFIED_ADDRESS, serializeVerifiedAddress, type VerifiedAddress 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/heic", "image/heif"];
 const ACCEPTED_EXTS  = [".jpg", ".jpeg", ".png", ".heic", ".heif"];
 const MAX_FILE_BYTES  = 20 * 1024 * 1024; // 20 MB per file
-const MAX_TOTAL_BYTES = 20 * 1024 * 1024; // 20 MB total across all photos
+const MAX_TOTAL_BYTES = 5 * 1024 * 1024; // 5 MB total across all photos
 const MAX_FILES       = 10;
 const CONTACT_EMAIL   = "devon@greenworx.co.nz";
 
@@ -86,7 +86,7 @@ export default function ContactForm() {
     }
     if (droppedForTotal) {
       errors.push(
-        `Photos must total 20 MB or less (roughly 3–5 images). Some photos weren't added — if you have more, please email them to ${CONTACT_EMAIL}.`
+        `Photos must total 5 MB or less (roughly 1–2 images). Some photos weren't added — if you have more, please email them to ${CONTACT_EMAIL}.`
       );
     }
 
@@ -237,7 +237,7 @@ export default function ContactForm() {
             </svg>
           </div>
           <p className="text-sm font-medium text-[#1B4332]">Click to upload or drag and drop</p>
-          <p className="text-xs text-gray-400 mt-1">JPG, PNG, HEIC, HEIF &mdash; 20 MB total (about 3&ndash;5 photos)</p>
+          <p className="text-xs text-gray-400 mt-1">JPG, PNG, HEIC, HEIF &mdash; 5 MB total (about 1&ndash;2 photos)</p>
         </label>
 
         <p className="text-xs text-gray-400 mt-2">
