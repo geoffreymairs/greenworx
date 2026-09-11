@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { trackLeadConversion } from "@/lib/gtag";
 import { useAntiSpam } from "@/lib/useAntiSpam";
 import HoneypotField from "@/components/HoneypotField";
+import AddressAutocomplete from "@/components/AddressAutocomplete";
+import { EMPTY_VERIFIED_ADDRESS, serializeVerifiedAddress, type VerifiedAddress } from "@/lib/address";
 
 export default function QuoteForm({ dark = false }: { dark?: boolean }) {
   const router = useRouter();
@@ -16,6 +18,7 @@ export default function QuoteForm({ dark = false }: { dark?: boolean }) {
   const [phone, setPhone]     = useState("");
   const [email, setEmail]     = useState("");
   const [address, setAddress] = useState("");
+  const [verifiedAddress, setVerifiedAddress] = useState<VerifiedAddress>(EMPTY_VERIFIED_ADDRESS);
   const [details, setDetails] = useState("");
 
   const inputClass = `w-full px-4 py-3 rounded-sm border text-sm outline-none transition-colors ${
@@ -30,11 +33,25 @@ export default function QuoteForm({ dark = false }: { dark?: boolean }) {
     setLoading(true);
     setError(null);
 
+    if (!verifiedAddress.placeId) {
+      setError("Please select your property address from the Google suggestions so we can verify the location.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, email, address, details, company: honeypot, elapsedMs: getElapsedMs() }),
+        body: JSON.stringify({
+          name,
+          phone,
+          email,
+          details,
+          company: honeypot,
+          elapsedMs: getElapsedMs(),
+          ...serializeVerifiedAddress(verifiedAddress),
+        }),
       });
 
       if (!res.ok) {
@@ -72,9 +89,15 @@ export default function QuoteForm({ dark = false }: { dark?: boolean }) {
           value={email} onChange={(e) => setEmail(e.target.value)} />
       </div>
       <div>
-        <label className={labelClass}>Property Address</label>
-        <input type="text" placeholder="Address of the property" className={inputClass}
-          value={address} onChange={(e) => setAddress(e.target.value)} />
+        <label className={labelClass}>Property Address *</label>
+        <AddressAutocomplete
+          value={address}
+          onChange={setAddress}
+          onSelect={setVerifiedAddress}
+          inputClassName={inputClass}
+          required
+          dark={dark}
+        />
       </div>
       <div>
         <label className={labelClass}>Project Details</label>

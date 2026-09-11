@@ -282,6 +282,13 @@ export async function POST(req: Request) {
     const phone   = sanitizeField(formData.get("phone")?.toString()   ?? "", MAX_LEN.phone);
     const email   = sanitizeField(formData.get("email")?.toString()   ?? "", MAX_LEN.email);
     const address = sanitizeField(formData.get("address")?.toString() ?? "", MAX_LEN.address);
+    const addressPlaceId = sanitizeField(formData.get("addressPlaceId")?.toString() ?? "", 200);
+    const addressLatitude = formData.get("addressLatitude")?.toString() ?? "";
+    const addressLongitude = formData.get("addressLongitude")?.toString() ?? "";
+    const addressPostcode = sanitizeField(formData.get("addressPostcode")?.toString() ?? "", 20);
+    const addressSuburb = sanitizeField(formData.get("addressSuburb")?.toString() ?? "", 100);
+    const addressCity = sanitizeField(formData.get("addressCity")?.toString() ?? "", 100);
+    const addressStreet = sanitizeField(formData.get("addressStreet")?.toString() ?? "", 200);
     const details = sanitizeField(formData.get("details")?.toString() ?? "", MAX_LEN.details);
 
     // ── Anti-spam gate — runs FIRST, before photos, email or Fergus call ──────
@@ -300,6 +307,17 @@ export async function POST(req: Request) {
       logBlockedSubmission("contact", spam.reason ?? "unknown", ip);
       return NextResponse.json({ error: SPAM_REJECTION_MESSAGE }, { status: 400 });
     }
+    if (!addressPlaceId) {
+      return NextResponse.json({ error: "Please select your property address from the Google suggestions." }, { status: 400 });
+    }
+    const verifiedAddressDetails = [
+      addressStreet && `Street: ${addressStreet}`,
+      addressSuburb && `Suburb: ${addressSuburb}`,
+      addressCity && `City: ${addressCity}`,
+      addressPostcode && `Postcode: ${addressPostcode}`,
+      addressLatitude && addressLongitude && `Coordinates: ${addressLatitude}, ${addressLongitude}`,
+      `Google Place ID: ${addressPlaceId}`,
+    ].filter(Boolean).join(" | ");
     // ── End anti-spam gate — everything below is the existing flow, unchanged ──
 
     const apiKey = process.env.RESEND_API_KEY;
@@ -350,7 +368,7 @@ export async function POST(req: Request) {
         to:          DEVON,
         replyTo:     email,
         subject:     `New Quote Request — ${name}`,
-        html:        devonHtml(name, phone, email, address, details, attachments.length),
+        html:        devonHtml(name, phone, email, address, `${details}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`, attachments.length),
         attachments: attachments.map(({ filename, content }) => ({ filename, content })),
       }),
       resend.emails.send({
@@ -378,7 +396,7 @@ export async function POST(req: Request) {
     }
 
     // ── Create Fergus enquiry (non-fatal) ─────────────────────────────────────
-    await createFergusEnquiry(name, phone, email, address, details);
+    await createFergusEnquiry(name, phone, email, address, `${details}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`);
 
     return NextResponse.json({ success: true });
   } catch (err) {
