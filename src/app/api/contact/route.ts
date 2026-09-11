@@ -63,7 +63,8 @@ async function createFergusEnquiry(
         description:    `${details || "No project details provided."}${photoNotes}`,
         source:         "contact_form",
         address1,
-        address2:        verifiedAddress.suburb || undefined,
+        address2:        undefined,
+        addressSuburb:   verifiedAddress.suburb || undefined,
         addressCity,
         addressRegion:   verifiedAddress.region || undefined,
         addressPostcode: verifiedAddress.postcode || undefined,
@@ -81,7 +82,7 @@ async function createFergusEnquiry(
     }
 
     const enquiry = json.data as { id?: number; status?: string };
-    console.log(`[Fergus] Enquiry created: id=${enquiry.id} status=${enquiry.status}`);
+    console.log(`[Fergus] Enquiry created: id=${enquiry.id} status=${enquiry.status} attachments=${attachments.length}`);
 
     if (!enquiry.id || attachments.length === 0) return;
 
@@ -101,7 +102,13 @@ async function createFergusEnquiry(
           headers: { Authorization: `Bearer ${apiKey}` },
           body: form,
         });
-        const uploadJson = await uploadResponse.json();
+        const uploadBody = await uploadResponse.text();
+        let uploadJson: unknown = uploadBody;
+        try {
+          uploadJson = JSON.parse(uploadBody);
+        } catch {
+          // Fergus may return a non-JSON error body.
+        }
 
         if (!uploadResponse.ok) {
           console.error(
@@ -429,6 +436,7 @@ export async function POST(req: Request) {
         replyTo:     email,
         subject:     `New Quote Request — ${name}`,
         html:        devonHtml(name, phone, email, address, `${details}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`, photoLinks),
+        attachments: attachments.map(({ filename, content }) => ({ filename, content })),
       }),
       resend.emails.send({
         from:    FROM,
