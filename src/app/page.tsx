@@ -180,13 +180,17 @@ export default function HomePage() {
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image
-            src="/hero.webp"
-            alt="Landscaped garden in Auckland"
-            fill
-            priority
-            className="object-cover"
-          />
+          <video
+            className="h-full w-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="/hero.webp"
+            aria-label="Landscaped garden in Auckland"
+          >
+            <source src="/greenworx-hero-cinematic-1080p.mp4" type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-r from-[#0F2B1E]/90 via-[#0F2B1E]/70 to-[#1B4332]/30" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-32 w-full">
