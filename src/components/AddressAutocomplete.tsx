@@ -58,6 +58,8 @@ function parseAddress(place: GooglePlace): VerifiedAddress {
     postcode: getComponent(place, "postal_code"),
     suburb: getComponent(place, "sublocality_level_1") || getComponent(place, "neighborhood"),
     city: getComponent(place, "locality") || getComponent(place, "administrative_area_level_2"),
+    region: getComponent(place, "administrative_area_level_1"),
+    country: getComponent(place, "country"),
     streetAddress: [streetNumber, route].filter(Boolean).join(" "),
   };
 }

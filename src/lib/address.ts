@@ -6,6 +6,8 @@ export interface VerifiedAddress {
   postcode: string;
   suburb: string;
   city: string;
+  region: string;
+  country: string;
   streetAddress: string;
 }
 
@@ -17,6 +19,8 @@ export const EMPTY_VERIFIED_ADDRESS: VerifiedAddress = {
   postcode: "",
   suburb: "",
   city: "",
+  region: "",
+  country: "",
   streetAddress: "",
 };
 
@@ -29,6 +33,8 @@ export function serializeVerifiedAddress(address: VerifiedAddress) {
     addressPostcode: address.postcode,
     addressSuburb: address.suburb,
     addressCity: address.city,
+    addressRegion: address.region,
+    addressCountry: address.country,
     addressStreet: address.streetAddress,
   };
 }
