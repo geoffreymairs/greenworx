@@ -33,6 +33,7 @@ async function createFergusEnquiry(
   email: string,
   verifiedAddress: VerifiedAddress,
   details: string,
+  photoLinks: { filename: string; url: string }[],
 ): Promise<void> {
   const rawKey = process.env.FERGUS_API_KEY ?? "";
   const apiKey = rawKey.charCodeAt(0) === 0xFEFF ? rawKey.slice(1) : rawKey;
@@ -43,6 +44,9 @@ async function createFergusEnquiry(
 
   const address1 = verifiedAddress.formattedAddress || verifiedAddress.streetAddress || "Address not provided";
   const addressCity = verifiedAddress.city || "Auckland";
+  const photoNotes = photoLinks.length > 0
+    ? `\n\nCUSTOMER PHOTOS:\n${photoLinks.map(({ filename, url }, index) => `Photo ${index + 1} (${filename}): ${url}`).join("\n")}`
+    : "";
 
   try {
     const res  = await fetch(`${FERGUS_BASE}/enquiries`, {
@@ -55,7 +59,7 @@ async function createFergusEnquiry(
         name,
         email,
         phoneNumber:    phone,
-        description:    details || "No project details provided.",
+        description:    `${details || "No project details provided."}${photoNotes}`,
         source:         "contact_form",
         address1,
         address2:        verifiedAddress.suburb || undefined,
@@ -431,7 +435,8 @@ export async function POST(req: Request) {
       country: sanitizeField(formData.get("addressCountry")?.toString() ?? "", 100),
       streetAddress: addressStreet,
     },
-    `${details}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`
+    `${details}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`,
+    photoLinks
   );
 
     return NextResponse.json({ success: true });
