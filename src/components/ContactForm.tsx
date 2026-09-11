@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { trackLeadConversion } from "@/lib/gtag";
 import { useAntiSpam } from "@/lib/useAntiSpam";
 import HoneypotField from "@/components/HoneypotField";
+import AddressAutocomplete from "@/components/AddressAutocomplete";
+import { EMPTY_VERIFIED_ADDRESS, serializeVerifiedAddress, type VerifiedAddress } from "@/lib/address";
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/heic", "image/heif"];
 const ACCEPTED_EXTS  = [".jpg", ".jpeg", ".png", ".heic", ".heif"];
@@ -33,6 +35,7 @@ export default function ContactForm() {
   const [phone, setPhone]     = useState("");
   const [email, setEmail]     = useState("");
   const [address, setAddress] = useState("");
+  const [verifiedAddress, setVerifiedAddress] = useState<VerifiedAddress>(EMPTY_VERIFIED_ADDRESS);
   const [details, setDetails] = useState("");
   const [photos, setPhotos]   = useState<PhotoFile[]>([]);
 
@@ -113,12 +116,20 @@ export default function ContactForm() {
     setLoading(true);
     setError(null);
 
+    if (!verifiedAddress.placeId) {
+      setError("Please select your property address from the Google suggestions so we can verify the location.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const fd = new FormData();
       fd.append("name",    name);
       fd.append("phone",   phone);
       fd.append("email",   email);
-      fd.append("address", address);
+      Object.entries(serializeVerifiedAddress(verifiedAddress)).forEach(([key, value]) => {
+        if (value !== null) fd.append(key, String(value));
+      });
       fd.append("details", details);
       fd.append("company", honeypot);
       fd.append("elapsedMs", String(getElapsedMs()));
@@ -180,10 +191,12 @@ export default function ContactForm() {
       {/* Property Address — required */}
       <div>
         <label className={labelClass}>Property Address *</label>
-        <input
-          type="text" required placeholder="Address of the property"
-          className={inputClass} value={address}
-          onChange={(e) => setAddress(e.target.value)}
+        <AddressAutocomplete
+          value={address}
+          onChange={setAddress}
+          onSelect={setVerifiedAddress}
+          inputClassName={inputClass}
+          required
         />
       </div>
 

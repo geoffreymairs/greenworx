@@ -272,6 +272,13 @@ export async function POST(req: Request) {
     const phone   = sanitizeField(String(body.phone   ?? ""), MAX_LEN.phone);
     const email   = sanitizeField(String(body.email   ?? ""), MAX_LEN.email);
     const address = sanitizeField(String(body.address ?? ""), MAX_LEN.address);
+    const addressPlaceId = sanitizeField(String(body.addressPlaceId ?? ""), 200);
+    const addressLatitude = String(body.addressLatitude ?? "");
+    const addressLongitude = String(body.addressLongitude ?? "");
+    const addressPostcode = sanitizeField(String(body.addressPostcode ?? ""), 20);
+    const addressSuburb = sanitizeField(String(body.addressSuburb ?? ""), 100);
+    const addressCity = sanitizeField(String(body.addressCity ?? ""), 100);
+    const addressStreet = sanitizeField(String(body.addressStreet ?? ""), 200);
     const details = sanitizeField(String(body.details ?? ""), MAX_LEN.details);
 
     const spam = runSpamChecks({
@@ -287,6 +294,17 @@ export async function POST(req: Request) {
       logBlockedSubmission("quote", spam.reason ?? "unknown", ip);
       return NextResponse.json({ error: SPAM_REJECTION_MESSAGE }, { status: 400 });
     }
+    if (!addressPlaceId) {
+      return NextResponse.json({ error: "Please select your property address from the Google suggestions." }, { status: 400 });
+    }
+    const verifiedAddressDetails = [
+      addressStreet && `Street: ${addressStreet}`,
+      addressSuburb && `Suburb: ${addressSuburb}`,
+      addressCity && `City: ${addressCity}`,
+      addressPostcode && `Postcode: ${addressPostcode}`,
+      addressLatitude && addressLongitude && `Coordinates: ${addressLatitude}, ${addressLongitude}`,
+      `Google Place ID: ${addressPlaceId}`,
+    ].filter(Boolean).join(" | ");
     // ── End anti-spam gate — everything below is the existing flow, unchanged ──
 
     const apiKey = process.env.RESEND_API_KEY;
@@ -308,7 +326,7 @@ export async function POST(req: Request) {
         to: DEVON,
         replyTo: email,
         subject: `New Quote Request — ${name}`,
-        html: devonHtml(name, phone, email, address ?? "", details ?? ""),
+        html: devonHtml(name, phone, email, address ?? "", `${details ?? ""}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`),
       }),
       resend.emails.send({
         from: FROM,
@@ -342,7 +360,7 @@ export async function POST(req: Request) {
       phone,
       email,
       address ?? "",
-      details  ?? "",
+      `${details ?? ""}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`,
     );
 
     return NextResponse.json({ success: true });
