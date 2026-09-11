@@ -34,6 +34,7 @@ async function createFergusEnquiry(
   verifiedAddress: VerifiedAddress,
   details: string,
   photoLinks: { filename: string; url: string }[],
+  attachments: { filename: string; content: Buffer; contentType: string }[],
 ): Promise<void> {
   const rawKey = process.env.FERGUS_API_KEY ?? "";
   const apiKey = rawKey.charCodeAt(0) === 0xFEFF ? rawKey.slice(1) : rawKey;
@@ -81,6 +82,41 @@ async function createFergusEnquiry(
 
     const enquiry = json.data as { id?: number; status?: string };
     console.log(`[Fergus] Enquiry created: id=${enquiry.id} status=${enquiry.status}`);
+
+    if (!enquiry.id || attachments.length === 0) return;
+
+    for (const attachment of attachments) {
+      try {
+        const form = new FormData();
+        form.append(
+          "file",
+          new Blob([new Uint8Array(attachment.content)], { type: attachment.contentType }),
+          attachment.filename
+        );
+        form.append("entityType", "enquiry");
+        form.append("entityId", String(enquiry.id));
+
+        const uploadResponse = await fetch(`${FERGUS_BASE}/attachments`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${apiKey}` },
+          body: form,
+        });
+        const uploadJson = await uploadResponse.json();
+
+        if (!uploadResponse.ok) {
+          console.error(
+            `[Fergus] Photo upload failed for enquiry ${enquiry.id}: ${attachment.filename}`,
+            uploadResponse.status,
+            JSON.stringify(uploadJson)
+          );
+          continue;
+        }
+
+        console.log(`[Fergus] Photo attached: enquiry=${enquiry.id} file=${attachment.filename}`);
+      } catch (uploadError) {
+        console.error(`[Fergus] Photo upload error for ${attachment.filename}:`, String(uploadError));
+      }
+    }
   } catch (err) {
     console.error("[Fergus] Unexpected error:", String(err));
   }
@@ -436,7 +472,8 @@ export async function POST(req: Request) {
       streetAddress: addressStreet,
     },
     `${details}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`,
-    photoLinks
+    photoLinks,
+    attachments
   );
 
     return NextResponse.json({ success: true });
