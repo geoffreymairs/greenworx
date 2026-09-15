@@ -11,7 +11,7 @@ import { compressImage } from "@/lib/compressImage";
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/heic", "image/heif"];
 const ACCEPTED_EXTS  = [".jpg", ".jpeg", ".png", ".heic", ".heif"];
-const MAX_TOTAL_BYTES = 5 * 1024 * 1024; // 5 MB total across all photos (after compression)
+const MAX_TOTAL_BYTES = 25 * 1024 * 1024; // 25 MB total across all photos (after compression)
 const COMPRESS_TARGET_MB = 2; // aim each photo at ~2 MB before hitting the total cap
 const MAX_FILES       = 10;
 const CONTACT_EMAIL   = "devon@greenworx.co.nz";
