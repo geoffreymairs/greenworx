@@ -7,11 +7,12 @@ import { useAntiSpam } from "@/lib/useAntiSpam";
 import HoneypotField from "@/components/HoneypotField";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
 import { EMPTY_VERIFIED_ADDRESS, serializeVerifiedAddress, type VerifiedAddress } from "@/lib/address";
+import { compressImage } from "@/lib/compressImage";
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/heic", "image/heif"];
 const ACCEPTED_EXTS  = [".jpg", ".jpeg", ".png", ".heic", ".heif"];
-const MAX_FILE_BYTES  = 20 * 1024 * 1024; // 20 MB per file
-const MAX_TOTAL_BYTES = 5 * 1024 * 1024; // 5 MB total across all photos
+const MAX_TOTAL_BYTES = 5 * 1024 * 1024; // 5 MB total across all photos (after compression)
+const COMPRESS_TARGET_MB = 2; // aim each photo at ~2 MB before hitting the total cap
 const MAX_FILES       = 10;
 const CONTACT_EMAIL   = "devon@greenworx.co.nz";
 
@@ -28,6 +29,7 @@ const labelClass =
 export default function ContactForm() {
   const router = useRouter();
   const [loading, setLoading]     = useState(false);
+  const [processing, setProcessing] = useState(false);
   const [error, setError]         = useState<string | null>(null);
   const { honeypot, setHoneypot, getElapsedMs } = useAntiSpam();
 
@@ -43,60 +45,65 @@ export default function ContactForm() {
 
   // ── Photo handling ─────────────────────────────────────────────────────────
 
-  function handleFiles(incoming: FileList | null) {
+  async function handleFiles(incoming: FileList | null) {
     if (!incoming) return;
     const fileArr = Array.from(incoming);
     const errors: string[] = [];
-    const valid: PhotoFile[] = [];
 
-    for (const file of fileArr) {
-      const ext  = "." + file.name.split(".").pop()?.toLowerCase();
-      const mime = file.type.toLowerCase();
-
-      const typeOk = ACCEPTED_TYPES.includes(mime) || ACCEPTED_EXTS.includes(ext);
-      if (!typeOk) {
-        errors.push(`"${file.name}" is not a supported format (JPG, PNG, HEIC, HEIF only).`);
-        continue;
-      }
-      if (file.size > MAX_FILE_BYTES) {
-        errors.push(`"${file.name}" exceeds the 20 MB limit.`);
-        continue;
-      }
-      valid.push({ file, id: crypto.randomUUID() });
-    }
-
-    let combined = [...photos, ...valid];
-
-    if (combined.length > MAX_FILES) {
-      errors.push(`Maximum ${MAX_FILES} photos allowed. Only the first ${MAX_FILES} were kept.`);
-      combined = combined.slice(0, MAX_FILES);
-    }
-
-    // Enforce a 20 MB total cap across all photos
-    const kept: PhotoFile[] = [];
-    let runningTotal = 0;
-    let droppedForTotal = false;
-    for (const item of combined) {
-      if (runningTotal + item.file.size > MAX_TOTAL_BYTES) {
-        droppedForTotal = true;
-        continue;
-      }
-      runningTotal += item.file.size;
-      kept.push(item);
-    }
-    if (droppedForTotal) {
-      errors.push(
-        `Photos must total 5 MB or less (roughly 1–2 images). Some photos weren't added — if you have more, please email them to ${CONTACT_EMAIL}.`
-      );
-    }
-
-    setPhotos(kept);
-
-    if (errors.length) setError(errors.join(" "));
-    else setError(null);
-
-    // Reset input so the same file can be re-added after removal
+    // Reset input immediately so the same file can be re-added after removal
     if (fileInputRef.current) fileInputRef.current.value = "";
+
+    setProcessing(true);
+    try {
+      const valid: PhotoFile[] = [];
+
+      for (const file of fileArr) {
+        const ext  = "." + file.name.split(".").pop()?.toLowerCase();
+        const mime = file.type.toLowerCase();
+
+        const typeOk = ACCEPTED_TYPES.includes(mime) || ACCEPTED_EXTS.includes(ext);
+        if (!typeOk) {
+          errors.push(`"${file.name}" is not a supported format (JPG, PNG, HEIC, HEIF only).`);
+          continue;
+        }
+
+        // Convert HEIC/HEIF to JPEG and shrink large photos so they fit the total cap.
+        const { file: processed } = await compressImage(file, COMPRESS_TARGET_MB);
+        valid.push({ file: processed, id: crypto.randomUUID() });
+      }
+
+      let combined = [...photos, ...valid];
+
+      if (combined.length > MAX_FILES) {
+        errors.push(`Maximum ${MAX_FILES} photos allowed. Only the first ${MAX_FILES} were kept.`);
+        combined = combined.slice(0, MAX_FILES);
+      }
+
+      // Enforce the total cap across all photos (after compression)
+      const kept: PhotoFile[] = [];
+      let runningTotal = 0;
+      let droppedForTotal = false;
+      for (const item of combined) {
+        if (runningTotal + item.file.size > MAX_TOTAL_BYTES) {
+          droppedForTotal = true;
+          continue;
+        }
+        runningTotal += item.file.size;
+        kept.push(item);
+      }
+      if (droppedForTotal) {
+        errors.push(
+          `Even after compressing, these photos are too large to send together. Some weren't added — if you have more, please email them to ${CONTACT_EMAIL}.`
+        );
+      }
+
+      setPhotos(kept);
+
+      if (errors.length) setError(errors.join(" "));
+      else setError(null);
+    } finally {
+      setProcessing(false);
+    }
   }
 
   function removePhoto(id: string) {
@@ -236,12 +243,14 @@ export default function ContactForm() {
                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
-          <p className="text-sm font-medium text-[#1B4332]">Click to upload or drag and drop</p>
-          <p className="text-xs text-gray-400 mt-1">JPG, PNG, HEIC, HEIF &mdash; 5 MB total (about 1&ndash;2 photos)</p>
+          <p className="text-sm font-medium text-[#1B4332]">
+            {processing ? "Optimising photos…" : "Click to upload or drag and drop"}
+          </p>
+          <p className="text-xs text-gray-400 mt-1">JPG, PNG, HEIC, HEIF &mdash; automatically optimised for you</p>
         </label>
 
         <p className="text-xs text-gray-400 mt-2">
-          Got more photos than that? Email them to{" "}
+          Photos are compressed in your browser so large phone photos still send. Got a lot of them? Email extras to{" "}
           <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#7DC143] hover:underline">{CONTACT_EMAIL}</a>.
         </p>
 
