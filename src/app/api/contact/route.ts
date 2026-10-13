@@ -11,7 +11,7 @@ import {
   MAX_LEN,
 } from "@/lib/antispam";
 
-const DEVON = "devon@greenworx.co.nz";
+const INBOX = "hello@greenworx.co.nz";
 const FROM  = "Greenworx Landscaping <noreply@greenworx.co.nz>";
 
 const FERGUS_BASE    = "https://api.fergus.com";
@@ -432,7 +432,7 @@ export async function POST(req: Request) {
     const [notification, confirmation] = await Promise.allSettled([
       resend.emails.send({
         from:        FROM,
-        to:          DEVON,
+        to:          INBOX,
         replyTo:     email,
         subject:     `New Quote Request — ${name}`,
         html:        devonHtml(name, phone, email, address, `${details}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`, photoLinks),
