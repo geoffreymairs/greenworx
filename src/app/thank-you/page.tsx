@@ -54,7 +54,7 @@ export default function ThankYouPage() {
         <p className="mt-12 text-sm text-gray-400">
           Need to reach us directly?{" "}
           <a href="tel:+64212799679" className="text-[#7DC143] hover:underline font-medium">
-            +64 21 279 9679
+            021 279 9679
           </a>
           {" "}or{" "}
           <a href="mailto:hello@greenworx.co.nz" className="text-[#7DC143] hover:underline font-medium">

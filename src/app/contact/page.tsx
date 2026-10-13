@@ -6,13 +6,13 @@ import PageHero from "@/components/PageHero";
 export const metadata: Metadata = {
   title: "Contact Us | Request a Landscaping Quote",
   description:
-    "Get in touch with Greenworx for a free, no-obligation landscaping quote. Call +64 21 279 9679 or email hello@greenworx.co.nz",
+    "Get in touch with Greenworx for a free, no-obligation landscaping quote. Call 021 279 9679 or email hello@greenworx.co.nz",
 };
 
 const contactDetails = [
   {
     label: "Phone",
-    value: "+64 21 279 9679",
+    value: "021 279 9679",
     href: "tel:+64212799679",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

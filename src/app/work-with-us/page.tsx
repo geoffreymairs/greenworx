@@ -265,7 +265,7 @@ export default function WorkWithUsPage() {
                   </div>
                   <div>
                     <p className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-1">Phone</p>
-                    <a href="tel:+64212799679" className="text-[#1B4332] hover:text-[#7DC143] font-medium text-sm transition-colors">+64 21 279 9679</a>
+                    <a href="tel:+64212799679" className="text-[#1B4332] hover:text-[#7DC143] font-medium text-sm transition-colors">021 279 9679</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
