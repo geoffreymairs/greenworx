@@ -6,13 +6,13 @@ import PageHero from "@/components/PageHero";
 export const metadata: Metadata = {
   title: "About Greenworx | Auckland Landscaping Company",
   description:
-    "Learn about Greenworx Landscaping — Auckland's premium landscaping company founded by Devon Mills. Discover our story, values and commitment to quality.",
+    "Learn about Greenworx Landscaping, Auckland's premium landscaping company founded by Devon Mills. Discover our story, values and commitment to quality.",
 };
 
 const values = [
   {
     title: "Quality Without Compromise",
-    desc: "Every project — no matter the budget — receives our full attention and commitment to quality. We won't cut corners and we won't rush the work.",
+    desc: "Every project, no matter the budget, receives our full attention and commitment to quality. We won't cut corners and we won't rush the work.",
   },
   {
     title: "Honest Communication",
@@ -47,7 +47,7 @@ export default function AboutPage() {
               <div className="relative h-96 rounded-sm overflow-hidden">
                 <Image
                   src="/devon-mills.jpg"
-                  alt="Devon Mills — founder of Greenworx Landscaping Auckland"
+                  alt="Devon Mills, founder of Greenworx Landscaping Auckland"
                   fill
                   className="object-cover"
                 />
@@ -78,7 +78,7 @@ export default function AboutPage() {
                 <p>
                   Having spent years working across Auckland&apos;s landscaping industry, Devon has developed an
                   exceptional eye for design and an unwavering commitment to quality. He personally oversees
-                  every project — from initial consultation through to final handover — ensuring that nothing
+                  every project, from initial consultation through to final handover, ensuring that nothing
                   leaves the Greenworx standard.
                 </p>
                 <p>

@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Project Gallery | Auckland Landscaping Portfolio",
   description:
-    "Browse the Greenworx project gallery — landscape design, construction, decking, paving and garden maintenance projects across Auckland.",
+    "Browse the Greenworx project gallery: landscape design, construction, decking, paving and garden maintenance projects across Auckland.",
 };
 
 const categories = ["All", "Landscape Design", "Construction", "Decking", "Paving", "Planting", "Maintenance", "Commercial"];

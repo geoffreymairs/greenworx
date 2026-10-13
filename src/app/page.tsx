@@ -17,7 +17,7 @@ const services = [
   },
   {
     title: "Retaining Walls, Fencing & Screens",
-    desc: "Timber, concrete block, stone and engineered retaining walls, plus boundary fencing and privacy screens — designed and built to last.",
+    desc: "Timber, concrete block, stone and engineered retaining walls, plus boundary fencing and privacy screens, designed and built to last.",
     href: "/services/retaining-walls",
     img: "/service-retaining-walls.jpg",
   },
@@ -95,7 +95,7 @@ const features = [
   },
   {
     title: "Reliable Communication",
-    desc: "Clear timelines, responsive updates and transparent pricing — from first call to final inspection.",
+    desc: "Clear timelines, responsive updates and transparent pricing, from first call to final inspection.",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -104,7 +104,7 @@ const features = [
   },
   {
     title: "Quality Materials",
-    desc: "We source only premium materials — chosen for durability, aesthetics and performance in Auckland's climate.",
+    desc: "We source only premium materials, chosen for durability, aesthetics and performance in Auckland's climate.",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
@@ -203,7 +203,7 @@ export default function HomePage() {
             </h1>
             <p className="text-white/75 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
               Landscape design, construction and garden maintenance for Auckland homes and businesses.
-              Setting new standards — landscapes that work.
+              Setting new standards: landscapes that work.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

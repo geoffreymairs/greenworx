@@ -130,7 +130,7 @@ export default function ApplicationForm() {
             ) : (
               <>
                 <p className="text-sm text-gray-600 font-medium">Choose file or drag and drop</p>
-                <p className="text-xs text-gray-400 mt-0.5">PDF, DOC or DOCX — max 5MB</p>
+                <p className="text-xs text-gray-400 mt-0.5">PDF, DOC or DOCX (max 5MB)</p>
               </>
             )}
           </div>

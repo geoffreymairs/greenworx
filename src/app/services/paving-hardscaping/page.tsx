@@ -14,7 +14,7 @@ export default function PavingHardscapingPage() {
       title="Paving & Hardscaping Auckland"
       subtitle="Premium paving and hardscaping solutions that form the foundation of a stunning outdoor space."
       heroImg="/header-LRP_0638.webp"
-      intro="The hardscape elements of your garden — pathways, courtyards, driveways and entertaining areas — are the backbone of your outdoor space. Get them right and everything else falls into place. Greenworx installs premium paving, concrete and hardscaping across Auckland, combining high-quality materials with precise workmanship to create surfaces that are as beautiful as they are durable."
+      intro="The hardscape elements of your garden (pathways, courtyards, driveways and entertaining areas) are the backbone of your outdoor space. Get them right and everything else falls into place. Greenworx installs premium paving, concrete and hardscaping across Auckland, combining high-quality materials with precise workmanship to create surfaces that are as beautiful as they are durable."
       includes={[
         "Natural stone paving (schist, bluestone, sandstone)",
         "Concrete paths and patio areas",
@@ -40,7 +40,7 @@ export default function PavingHardscapingPage() {
         },
         {
           title: "Design Integration",
-          desc: "Your paving is designed to integrate with the wider garden — matching your home's style and palette.",
+          desc: "Your paving is designed to integrate with the wider garden, matching your home's style and palette.",
         },
         {
           title: "Drainage Expertise",

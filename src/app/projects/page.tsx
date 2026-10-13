@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Projects | Auckland Landscaping Portfolio | Greenworx",
   description:
-    "Detailed project case studies from Greenworx — Auckland's premium landscaping company. See our landscape design, construction and maintenance projects.",
+    "Detailed project case studies from Greenworx, Auckland's premium landscaping company. See our landscape design, construction and maintenance projects.",
 };
 
 const projects = [
@@ -16,7 +16,7 @@ const projects = [
     overview:
       "A complete redesign and rebuild of a 1,200m² Remuera property, transforming an overgrown and underperforming garden into a cohesive, premium outdoor space.",
     challenge:
-      "The existing garden had poor drainage, ageing retaining structures and no cohesive design language — requiring a full redesign from the ground up.",
+      "The existing garden had poor drainage, ageing retaining structures and no cohesive design language, requiring a full redesign from the ground up.",
     solution:
       "Greenworx delivered a comprehensive redesign including new retaining walls, improved drainage, an expansive entertaining area and a carefully considered planting scheme of natives and exotics.",
     img: "/remuera-garden.webp",
@@ -40,7 +40,7 @@ const projects = [
     overview:
       "Creation of a premium outdoor living area for a family home, centred around a large hardwood deck, natural stone courtyard and integrated privacy screening.",
     challenge:
-      "The clients needed a practical, beautiful outdoor space that would work for family life and adult entertaining — while maintaining privacy from neighbouring properties.",
+      "The clients needed a practical, beautiful outdoor space that would work for family life and adult entertaining, while maintaining privacy from neighbouring properties.",
     solution:
       "Greenworx designed and built a multi-level hardwood deck with integrated seating, a natural stone-paved courtyard, and a custom timber screen providing privacy without sacrificing light.",
     img: "/remuera-garden.webp",

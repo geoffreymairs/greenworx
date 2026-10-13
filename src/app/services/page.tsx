@@ -19,7 +19,7 @@ const services = [
   },
   {
     title: "Retaining Walls, Fencing & Screens",
-    desc: "Timber, concrete block, stone and engineered retaining walls, plus boundary fencing, privacy screens and decorative screens — including drainage, council consent support and full construction.",
+    desc: "Timber, concrete block, stone and engineered retaining walls, plus boundary fencing, privacy screens and decorative screens, including drainage, council consent support and full construction.",
     href: "/services/retaining-walls",
     img: "/service-retaining-walls.jpg",
     cta: "Request a Quote",
@@ -54,7 +54,7 @@ const services = [
   },
   {
     title: "Planting & Soft Landscaping",
-    desc: "Expert plant sourcing and installation — native and exotic planting schemes, feature gardens and garden rejuvenation suited to Auckland's climate.",
+    desc: "Expert plant sourcing and installation: native and exotic planting schemes, feature gardens and garden rejuvenation suited to Auckland's climate.",
     href: "/services/planting-soft-landscaping",
     img: "/service-planting-soft-landscaping.jpg",
     cta: "Request a Planting Quote",
@@ -68,7 +68,7 @@ const services = [
   },
   {
     title: "Multi-Unit Residential & Commercial Developments",
-    desc: "Landscape design and construction for townhouse developments, apartment complexes and commercial sites — delivered at scale without compromising on quality.",
+    desc: "Landscape design and construction for townhouse developments, apartment complexes and commercial sites, delivered at scale without compromising on quality.",
     href: "/services/multi-unit-developments",
     img: "/multi-unit-1.jpg",
     cta: "Discuss Your Development",

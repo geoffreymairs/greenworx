@@ -14,7 +14,7 @@ export default function CommercialPage() {
       title="Commercial & Body Corporate Maintenance"
       subtitle="Reliable, professional grounds maintenance and landscaping for Auckland's commercial properties, body corporates and managed developments."
       heroImg="/header-LRP_0936.webp"
-      intro="First impressions matter. For commercial properties and apartment complexes, well-maintained grounds signal professionalism, care and pride. Greenworx delivers consistent, high-quality commercial landscaping and grounds maintenance for body corporates, property managers, office developments and residential complexes across Auckland. We build long-term partnerships on a foundation of reliability, clear communication and genuine quality of work — so you never have to chase us."
+      intro="First impressions matter. For commercial properties and apartment complexes, well-maintained grounds signal professionalism, care and pride. Greenworx delivers consistent, high-quality commercial landscaping and grounds maintenance for body corporates, property managers, office developments and residential complexes across Auckland. We build long-term partnerships on a foundation of reliability, clear communication and genuine quality of work, so you never have to chase us."
       includes={[
         "Scheduled grounds maintenance programmes",
         "Body corporate garden maintenance",
@@ -36,7 +36,7 @@ export default function CommercialPage() {
         },
         {
           title: "Dedicated Account Management",
-          desc: "A single point of contact for all your commercial landscaping needs — responsive, organised and easy to deal with.",
+          desc: "A single point of contact for all your commercial landscaping needs: responsive, organised and easy to deal with.",
         },
         {
           title: "Tailored Maintenance Programmes",
@@ -44,7 +44,7 @@ export default function CommercialPage() {
         },
         {
           title: "Fully Insured",
-          desc: "Complete public liability insurance and professional indemnity — appropriate for all commercial and body corporate environments.",
+          desc: "Complete public liability insurance and professional indemnity, appropriate for all commercial and body corporate environments.",
         },
       ]}
       ctaLabel="Request a Commercial Quote"

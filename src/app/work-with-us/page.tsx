@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const reasons = [
   {
     title: "Diverse, Interesting Projects",
-    desc: "From intricate garden designs to major landscape construction — no two projects are the same. You'll work across some of Auckland's finest homes and commercial properties.",
+    desc: "From intricate garden designs to major landscape construction. No two projects are the same. You'll work across some of Auckland's finest homes and commercial properties.",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
@@ -49,7 +49,7 @@ const reasons = [
   },
   {
     title: "Auckland's Premium Properties",
-    desc: "We work across Remuera, St Heliers, Glendowie, Epsom and beyond — high-end projects in great locations that showcase your skills at their best.",
+    desc: "We work across Remuera, St Heliers, Glendowie, Epsom and beyond: high-end projects in great locations that showcase your skills at their best.",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -83,7 +83,7 @@ const values = [
   },
   {
     label: "Respect for Clients & Properties",
-    desc: "We treat every property as if it were our own — with care, respect and a genuine desire to exceed expectations.",
+    desc: "We treat every property as if it were our own, with care, respect and a genuine desire to exceed expectations.",
   },
   {
     label: "Pride in Workmanship",
@@ -188,12 +188,12 @@ export default function WorkWithUsPage() {
               </h2>
               <p className="text-white/70 text-lg leading-relaxed mb-4">
                 We&apos;re looking for hard working people who take pride in what they do. Whether you&apos;re an
-                experienced landscaper or someone who&apos;s keen to learn the trade — if you show up, work hard
+                experienced landscaper or someone who&apos;s keen to learn the trade: if you show up, work hard
                 and care about the quality of your work, we want to hear from you.
               </p>
               <p className="text-white/70 leading-relaxed mb-10">
                 Experience across landscaping, construction, planting, paving, maintenance or garden work is
-                valuable — but attitude and work ethic matter just as much. We&apos;re building a team of people
+                valuable, but attitude and work ethic matter just as much. We&apos;re building a team of people
                 who are genuinely proud of what they create.
               </p>
 
@@ -235,7 +235,7 @@ export default function WorkWithUsPage() {
             <p className="text-gray-600 leading-relaxed max-w-xl mx-auto">
               We are always interested in hearing from motivated people who are passionate about landscaping,
               gardening and outdoor construction. If you have the skills, the work ethic and the desire to be
-              part of a premium team — send us your application.
+              part of a premium team. Send us your application.
             </p>
           </div>
         </div>

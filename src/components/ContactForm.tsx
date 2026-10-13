@@ -93,7 +93,7 @@ export default function ContactForm() {
       }
       if (droppedForTotal) {
         errors.push(
-          `Even after compressing, these photos are too large to send together. Some weren't added — if you have more, please email them to ${CONTACT_EMAIL}.`
+          `Even after compressing, these photos are too large to send together. Some weren't added. If you have more, please email them to ${CONTACT_EMAIL}.`
         );
       }
 
@@ -246,7 +246,7 @@ export default function ContactForm() {
           <p className="text-sm font-medium text-[#1B4332]">
             {processing ? "Optimising photos…" : "Click to upload or drag and drop"}
           </p>
-          <p className="text-xs text-gray-400 mt-1">JPG, PNG, HEIC, HEIF &mdash; automatically optimised for you</p>
+          <p className="text-xs text-gray-400 mt-1">JPG, PNG, HEIC, HEIF. Automatically optimised for you</p>
         </label>
 
         <p className="text-xs text-gray-400 mt-2">

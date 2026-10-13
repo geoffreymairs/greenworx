@@ -14,7 +14,7 @@ export default function DeckingPage() {
       title="Decking Auckland"
       subtitle="Bespoke timber and hardwood decks designed and built for Auckland's indoor-outdoor lifestyle."
       heroImg="/header-decking.webp"
-      intro="A well-designed deck transforms the way you use your home. At Greenworx, we design and build premium timber decks that integrate seamlessly with your home and garden — creating beautiful, functional outdoor spaces for entertaining, relaxing and everyday living. From modest platform decks to elaborate multi-level entertainment areas, every project receives the same attention to detail."
+      intro="A well-designed deck transforms the way you use your home. At Greenworx, we design and build premium timber decks that integrate seamlessly with your home and garden, creating beautiful, functional outdoor spaces for entertaining, relaxing and everyday living. From modest platform decks to elaborate multi-level entertainment areas, every project receives the same attention to detail."
       includes={[
         "Softwood and hardwood deck construction",
         "Composite and low-maintenance decking options",
@@ -30,11 +30,11 @@ export default function DeckingPage() {
       benefits={[
         {
           title: "Premium Timbers",
-          desc: "We use only quality timbers and products — chosen for durability and appearance in Auckland's coastal climate.",
+          desc: "We use only quality timbers and products, chosen for durability and appearance in Auckland's coastal climate.",
         },
         {
           title: "Bespoke Design",
-          desc: "Every deck is designed specifically for your home, aspect and lifestyle — never off-the-shelf.",
+          desc: "Every deck is designed specifically for your home, aspect and lifestyle. Never off-the-shelf.",
         },
         {
           title: "Council Compliance",
