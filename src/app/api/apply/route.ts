@@ -65,7 +65,7 @@ export async function POST(req: Request) {
       from: FROM,
       to: TO,
       replyTo: email,
-      subject: `New Job Application — ${name}`,
+      subject: `New Job Application: ${name}`,
       attachments,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#1B4332">
@@ -74,7 +74,7 @@ export async function POST(req: Request) {
               NEW JOB APPLICATION
             </h1>
             <p style="color:rgba(255,255,255,0.6);margin:4px 0 0;font-size:13px">
-              Submitted via greenworx.co.nz — Work With Us
+              Submitted via greenworx.co.nz | Work With Us
             </p>
           </div>
           <div style="background:#F8F7F4;padding:32px;border-radius:0 0 4px 4px">

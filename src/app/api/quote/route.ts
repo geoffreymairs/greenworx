@@ -325,14 +325,14 @@ export async function POST(req: Request) {
         from: FROM,
         to: INBOX,
         replyTo: email,
-        subject: `New Quote Request — ${name}`,
+        subject: `New Quote Request: ${name}`,
         html: devonHtml(name, phone, email, address ?? "", `${details ?? ""}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`),
       }),
       resend.emails.send({
         from: FROM,
         to: email,
         replyTo: "hello@greenworx.co.nz",
-        subject: "We've received your enquiry — Greenworx Landscaping",
+        subject: "We've received your enquiry | Greenworx Landscaping",
         html: confirmationHtml(name, address ?? "", details ?? ""),
       }),
     ]);

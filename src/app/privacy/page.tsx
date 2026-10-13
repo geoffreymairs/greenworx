@@ -5,7 +5,7 @@ import PageHero from "@/components/PageHero";
 export const metadata: Metadata = {
   title: "Privacy Policy | Greenworx Landscaping",
   description:
-    "Greenworx Landscaping privacy policy — how we collect, use and protect your personal information.",
+    "Greenworx Landscaping privacy policy: how we collect, use and protect your personal information.",
 };
 
 const LAST_UPDATED = "6 June 2026";
@@ -57,14 +57,14 @@ export default function PrivacyPolicyPage() {
               <p>We may collect the following categories of personal information:</p>
               <SubHeading>Information you provide directly</SubHeading>
               <ul>
-                <li><strong>Contact and enquiry data</strong> — your name, phone number, email address, property address and details of your landscaping project when you complete our contact or quote request form.</li>
-                <li><strong>Job application data</strong> — your name, phone number, email address, work experience and any CV or supporting documents you submit via our Work With Us page.</li>
-                <li><strong>Correspondence</strong> — any information you include when contacting us by phone, email or through the website.</li>
+                <li><strong>Contact and enquiry data</strong>: your name, phone number, email address, property address and details of your landscaping project when you complete our contact or quote request form.</li>
+                <li><strong>Job application data</strong>: your name, phone number, email address, work experience and any CV or supporting documents you submit via our Work With Us page.</li>
+                <li><strong>Correspondence</strong>: any information you include when contacting us by phone, email or through the website.</li>
               </ul>
               <SubHeading>Information collected automatically</SubHeading>
               <ul>
-                <li><strong>Usage data</strong> — pages visited, time spent on pages, links clicked, referring URLs and general browsing behaviour, collected via cookies and analytics tools (see Section 5).</li>
-                <li><strong>Device and technical data</strong> — IP address, browser type, device type and operating system.</li>
+                <li><strong>Usage data</strong>: pages visited, time spent on pages, links clicked, referring URLs and general browsing behaviour, collected via cookies and analytics tools (see Section 5).</li>
+                <li><strong>Device and technical data</strong>: IP address, browser type, device type and operating system.</li>
               </ul>
             </PolicySection>
 
@@ -75,7 +75,7 @@ export default function PrivacyPolicyPage() {
                 <li>Communicate with you about your project, scheduling and ongoing work.</li>
                 <li>Process and assess job applications.</li>
                 <li>Improve the performance, content and user experience of our website.</li>
-                <li>Analyse how visitors use our site to better understand our audience (via analytics — see Section 5).</li>
+                <li>Analyse how visitors use our site to better understand our audience (via analytics; see Section 5).</li>
                 <li>Comply with any applicable legal obligations.</li>
               </ul>
               <p>
@@ -87,10 +87,10 @@ export default function PrivacyPolicyPage() {
             <PolicySection title="4. Legal Basis for Processing">
               <p>We process your personal information on the following grounds:</p>
               <ul>
-                <li><strong>Legitimate interests</strong> — to respond to enquiries, provide quotes and deliver our services.</li>
-                <li><strong>Contractual necessity</strong> — to perform the landscaping services you have engaged us to provide.</li>
-                <li><strong>Consent</strong> — where you have given explicit consent, such as subscribing to marketing communications.</li>
-                <li><strong>Legal obligation</strong> — where we are required to process data to comply with applicable law.</li>
+                <li><strong>Legitimate interests</strong>: to respond to enquiries, provide quotes and deliver our services.</li>
+                <li><strong>Contractual necessity</strong>: to perform the landscaping services you have engaged us to provide.</li>
+                <li><strong>Consent</strong>: where you have given explicit consent, such as subscribing to marketing communications.</li>
+                <li><strong>Legal obligation</strong>: where we are required to process data to comply with applicable law.</li>
               </ul>
             </PolicySection>
 
@@ -103,18 +103,18 @@ export default function PrivacyPolicyPage() {
               <SubHeading>Cookies we use</SubHeading>
               <ul>
                 <li>
-                  <strong>Strictly necessary cookies</strong> — required for the site to function. These
+                  <strong>Strictly necessary cookies</strong>: required for the site to function. These
                   cannot be disabled.
                 </li>
                 <li>
-                  <strong>Analytics cookies</strong> — we currently use, or may in the future use,
+                  <strong>Analytics cookies</strong>: we currently use, or may in the future use,
                   Google Analytics to collect anonymous data about how visitors use our website. This
                   includes pages viewed, session duration and general traffic patterns. Google Analytics
                   may set cookies such as <code>_ga</code>, <code>_gid</code> and <code>_gat</code>.
                   Data collected is aggregated and anonymised where possible.
                 </li>
                 <li>
-                  <strong>Marketing cookies</strong> — we may in the future use remarketing or
+                  <strong>Marketing cookies</strong>: we may in the future use remarketing or
                   advertising tools (such as Google Ads conversion tracking or Meta Pixel). If
                   implemented, these will be disclosed here and managed through a cookie consent
                   mechanism.
@@ -156,10 +156,10 @@ export default function PrivacyPolicyPage() {
             <PolicySection title="6. Sharing Your Information">
               <p>We do not sell, trade or rent your personal information to third parties. We may share your information with:</p>
               <ul>
-                <li><strong>Service providers</strong> — trusted third-party suppliers who assist us in operating our website or conducting our business (e.g. website hosting, form submission services, email platforms), subject to confidentiality obligations.</li>
-                <li><strong>Analytics providers</strong> — such as Google Analytics, as described in Section 5.</li>
-                <li><strong>Legal and regulatory authorities</strong> — where required by law, court order or government authority.</li>
-                <li><strong>Business transfers</strong> — in the event of a sale, merger or acquisition of our business, your information may be transferred as part of that transaction.</li>
+                <li><strong>Service providers</strong>: trusted third-party suppliers who assist us in operating our website or conducting our business (e.g. website hosting, form submission services, email platforms), subject to confidentiality obligations.</li>
+                <li><strong>Analytics providers</strong>: such as Google Analytics, as described in Section 5.</li>
+                <li><strong>Legal and regulatory authorities</strong>: where required by law, court order or government authority.</li>
+                <li><strong>Business transfers</strong>: in the event of a sale, merger or acquisition of our business, your information may be transferred as part of that transaction.</li>
               </ul>
             </PolicySection>
 

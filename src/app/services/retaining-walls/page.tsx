@@ -12,9 +12,9 @@ export default function RetainingWallsPage() {
     <ServicePageLayout
       tag="Our Services"
       title="Retaining Walls, Fencing & Screens Auckland"
-      subtitle="Strong, durable retaining walls and beautifully crafted fencing and privacy screens — designed and built to manage your site and define your outdoor space."
+      subtitle="Strong, durable retaining walls and beautifully crafted fencing and privacy screens, designed and built to manage your site and define your outdoor space."
       heroImg="/header-retaining-walls.webp"
-      intro="Retaining walls, fencing and privacy screens are among the most important structural elements of any property — managing soil movement, creating usable level areas, providing privacy and security, and giving your landscape a defined, finished look. Greenworx designs and builds retaining walls across Auckland using timber, concrete block, stone and engineered solutions suited to your site, soil conditions and budget, alongside premium fencing and screens that combine quality materials with skilled craftsmanship. From small garden terraces and timber fences to large structural retaining walls requiring engineering and council consent, our team delivers results that are built to last and look great doing it."
+      intro="Retaining walls, fencing and privacy screens are among the most important structural elements of any property, managing soil movement, creating usable level areas, providing privacy and security, and giving your landscape a defined, finished look. Greenworx designs and builds retaining walls across Auckland using timber, concrete block, stone and engineered solutions suited to your site, soil conditions and budget, alongside premium fencing and screens that combine quality materials with skilled craftsmanship. From small garden terraces and timber fences to large structural retaining walls requiring engineering and council consent, our team delivers results that are built to last and look great doing it."
       includes={[
         "Timber, concrete block and stone retaining walls",
         "Engineered retaining wall design and council consent",
@@ -40,7 +40,7 @@ export default function RetainingWallsPage() {
         },
         {
           title: "Quality Materials & Finishes",
-          desc: "Timber, concrete block, stone, aluminium or laser-cut screens — we help you choose the right materials for your site and aesthetic.",
+          desc: "Timber, concrete block, stone, aluminium or laser-cut screens. We help you choose the right materials for your site and aesthetic.",
         },
         {
           title: "Experienced Team",

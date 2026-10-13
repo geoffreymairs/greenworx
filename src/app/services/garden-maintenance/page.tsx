@@ -12,9 +12,9 @@ export default function GardenMaintenancePage() {
     <ServicePageLayout
       tag="Our Services"
       title="Garden Maintenance Auckland"
-      subtitle="Reliable, professional garden maintenance that keeps your outdoor space looking immaculate — every season, every visit."
+      subtitle="Reliable, professional garden maintenance that keeps your outdoor space looking immaculate, every season, every visit."
       heroImg="/header-LRP_0691.webp"
-      intro="Your garden is an investment — and like any investment, it needs consistent care to perform at its best. Greenworx provides professional garden maintenance services for Auckland homeowners and commercial clients who demand a high standard and reliable service. Whether you need regular scheduled visits, a one-off garden tidy-up, or a spring or autumn clean-up, we tailor our service to your garden's needs and your budget."
+      intro="Your garden is an investment, and like any investment, it needs consistent care to perform at its best. Greenworx provides professional garden maintenance services for Auckland homeowners and commercial clients who demand a high standard and reliable service. Whether you need regular scheduled visits, a one-off garden tidy-up, or a spring or autumn clean-up, we tailor our service to your garden's needs and your budget."
       includes={[
         "Pruning and trimming of shrubs and trees",
         "Hedge cutting and shaping",
@@ -35,7 +35,7 @@ export default function GardenMaintenancePage() {
         },
         {
           title: "Consistent Crew",
-          desc: "The same experienced team visits your property each time — they know your garden and care for it accordingly.",
+          desc: "The same experienced team visits your property each time. They know your garden and care for it accordingly.",
         },
         {
           title: "Transparent Pricing",
@@ -43,7 +43,7 @@ export default function GardenMaintenancePage() {
         },
         {
           title: "Fully Insured",
-          desc: "Complete peace of mind — all Greenworx maintenance teams are fully insured and professionally trained.",
+          desc: "Complete peace of mind: all Greenworx maintenance teams are fully insured and professionally trained.",
         },
       ]}
       ctaLabel="Schedule Maintenance"

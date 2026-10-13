@@ -14,7 +14,7 @@ export default function PlantingSoftLandscapingPage() {
       title="Planting & Soft Landscaping Auckland"
       subtitle="Expertly sourced and installed planting programmes that bring life, colour and texture to your outdoor space."
       heroImg="/header-LRP_0647.webp"
-      intro="Plants are the soul of any great garden. Greenworx brings horticultural expertise to every planting project — understanding how plants behave in Auckland's climate, which species suit your soil and aspect, and how to combine plants for year-round interest. Whether you need a full garden installation, a native planting scheme, a feature garden or a replanting of an existing space, we deliver beautiful, thriving results."
+      intro="Plants are the soul of any great garden. Greenworx brings horticultural expertise to every planting project, understanding how plants behave in Auckland's climate, which species suit your soil and aspect, and how to combine plants for year-round interest. Whether you need a full garden installation, a native planting scheme, a feature garden or a replanting of an existing space, we deliver beautiful, thriving results."
       includes={[
         "Full garden planting installations",
         "Native and exotic planting schemes",
@@ -32,15 +32,15 @@ export default function PlantingSoftLandscapingPage() {
       benefits={[
         {
           title: "Horticultural Knowledge",
-          desc: "We select plants that thrive in Auckland's specific conditions — not just plants that look good in a nursery.",
+          desc: "We select plants that thrive in Auckland's specific conditions, not just plants that look good in a nursery.",
         },
         {
           title: "Quality Plant Sourcing",
-          desc: "We source plants from trusted Auckland growers — healthy, well-established stock that establishes quickly.",
+          desc: "We source plants from trusted Auckland growers: healthy, well-established stock that establishes quickly.",
         },
         {
           title: "Design-Led Planting",
-          desc: "Every planting scheme is designed for year-round appeal — considering texture, form, colour and seasonal change.",
+          desc: "Every planting scheme is designed for year-round appeal, considering texture, form, colour and seasonal change.",
         },
         {
           title: "Ongoing Care",

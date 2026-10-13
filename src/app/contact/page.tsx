@@ -141,7 +141,7 @@ const faqs = [
   },
   {
     q: "Do you service all of Auckland?",
-    a: "Yes — we work across the greater Auckland region, with a focus on premium residential and commercial properties in the eastern and central suburbs.",
+    a: "Yes, we work across the greater Auckland region, with a focus on premium residential and commercial properties in the eastern and central suburbs.",
   },
   {
     q: "Can you provide landscape design?",
@@ -149,11 +149,11 @@ const faqs = [
   },
   {
     q: "Do you handle retaining walls and fencing?",
-    a: "Yes — retaining walls, fencing and privacy screens are one of our core services, built to last in Auckland's conditions and with engineering and consent support where required.",
+    a: "Yes, retaining walls, fencing and privacy screens are one of our core services, built to last in Auckland's conditions and with engineering and consent support where required.",
   },
   {
     q: "Do you work with developers and commercial clients?",
-    a: "Yes — we deliver landscaping for multi-unit residential developments, townhouses, apartments and commercial sites, as well as ongoing maintenance for body corporates and property managers.",
+    a: "Yes, we deliver landscaping for multi-unit residential developments, townhouses, apartments and commercial sites, as well as ongoing maintenance for body corporates and property managers.",
   },
 ];
 

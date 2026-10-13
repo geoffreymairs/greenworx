@@ -8,7 +8,7 @@ import galleryData from "@/data/gallery.json";
 export const metadata: Metadata = {
   title: "Our Work | Auckland Landscaping Projects & Gallery | Greenworx",
   description:
-    "Explore Greenworx's portfolio of premium Auckland landscaping projects — landscaping, paving, planting, lawns, retaining walls and outdoor transformations across Auckland.",
+    "Explore Greenworx's portfolio of premium Auckland landscaping projects: landscaping, paving, planting, lawns, retaining walls and outdoor transformations across Auckland.",
 };
 
 const projects = [
@@ -73,7 +73,7 @@ export default function OurWorkPage() {
       <PageHero
         tag="Portfolio"
         title="Our Work"
-        subtitle="A selection of recent projects — from full garden transformations to outdoor living areas and ongoing maintenance programmes across Auckland."
+        subtitle="A selection of recent projects, from full garden transformations to outdoor living areas and ongoing maintenance programmes across Auckland."
         image="/header-our-work.webp"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Our Work" }]}
       />

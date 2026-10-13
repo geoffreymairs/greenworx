@@ -16,7 +16,7 @@ export default function LandscapeDesignPage() {
         title="Landscape Design Auckland"
         subtitle="Thoughtful, site-specific design that transforms your outdoor space into something truly exceptional."
         heroImg="/header-LRP_0498.webp"
-        intro="Great landscaping starts with great design. At Greenworx, we take the time to understand your property, your lifestyle and your vision before a single plant goes in the ground. From garden design consultations and concept sketches through to detailed planting plans and full resource consent packages, we deliver considered designs that work beautifully for years to come — and that we can bring to life through our construction services."
+        intro="Great landscaping starts with great design. At Greenworx, we take the time to understand your property, your lifestyle and your vision before a single plant goes in the ground. From garden design consultations and concept sketches through to detailed planting plans and full resource consent packages, we deliver considered designs that work beautifully for years to come, and that we can bring to life through our construction services."
         includes={[
           "Garden design consultations",
           "Concept plans and design briefs",
@@ -71,7 +71,7 @@ export default function LandscapeDesignPage() {
           <div className="relative w-full rounded-sm overflow-hidden">
             <Image
               src="/how-it-works.png"
-              alt="How it works — our design and build process from enquiry to enjoying your new landscape"
+              alt="How it works: our design and build process from enquiry to enjoying your new landscape"
               width={1536}
               height={1024}
               className="w-full h-auto"

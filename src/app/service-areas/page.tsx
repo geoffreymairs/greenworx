@@ -6,7 +6,7 @@ import PageHero from "@/components/PageHero";
 export const metadata: Metadata = {
   title: "Landscaping Service Areas Auckland | Greenworx",
   description:
-    "Greenworx provides premium landscaping services across Auckland's eastern and central suburbs — Remuera, St Heliers, Glendowie, Kohimarama, Epsom and more.",
+    "Greenworx provides premium landscaping services across Auckland's eastern and central suburbs: Remuera, St Heliers, Glendowie, Kohimarama, Epsom and more.",
 };
 
 const areas = [

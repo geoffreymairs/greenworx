@@ -158,7 +158,7 @@ export default function TermsOfTradePage() {
       <PageHero
         tag="Legal"
         title="Terms of Trade"
-        subtitle="Terms and Conditions of Trade for Greenworx Limited — applies to all quotations, maintenance services, landscaping construction works, and related services."
+        subtitle="Terms and Conditions of Trade for Greenworx Limited, applying to all quotations, maintenance services, landscaping construction works, and related services."
         image="/header-_RP_0066.webp"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Terms of Trade" }]}
       />

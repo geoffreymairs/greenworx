@@ -152,7 +152,7 @@ function devonHtml(
         <p style="margin:0 0 2px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#7DC143">Greenworx Landscaping</p>
         <h1 style="margin:0;font-family:Georgia,serif;font-size:22px;font-weight:700;color:white">New Quote Request</h1>
         <p style="margin:6px 0 0;font-family:Arial,sans-serif;font-size:12px;color:rgba(255,255,255,0.5)">
-          Submitted via greenworx.co.nz/contact &mdash; added to Fergus Enquiries${photoLinks.length > 0 ? ` &mdash; ${photoLinks.length} photo${photoLinks.length > 1 ? "s" : ""} available below` : ""}
+          Submitted via greenworx.co.nz/contact | added to Fergus Enquiries${photoLinks.length > 0 ? ` | ${photoLinks.length} photo${photoLinks.length > 1 ? "s" : ""} available below` : ""}
         </p>
       </td></tr>
 
@@ -434,7 +434,7 @@ export async function POST(req: Request) {
         from:        FROM,
         to:          INBOX,
         replyTo:     email,
-        subject:     `New Quote Request — ${name}`,
+        subject:     `New Quote Request: ${name}`,
         html:        devonHtml(name, phone, email, address, `${details}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`, photoLinks),
         attachments: attachments.map(({ filename, content }) => ({ filename, content })),
       }),
@@ -442,7 +442,7 @@ export async function POST(req: Request) {
         from:    FROM,
         to:      email,
         replyTo: "hello@greenworx.co.nz",
-        subject: "We've received your enquiry — Greenworx Landscaping",
+        subject: "We've received your enquiry | Greenworx Landscaping",
         html:    confirmationHtml(name, address, details),
       }),
     ]);

@@ -12,9 +12,9 @@ export default function MultiUnitDevelopmentsPage() {
     <ServicePageLayout
       tag="Our Services"
       title="Multi-Unit Residential & Commercial Developments"
-      subtitle="Landscaping design and construction for townhouse developments, apartment complexes and commercial sites — delivered at scale without compromising on quality."
+      subtitle="Landscaping design and construction for townhouse developments, apartment complexes and commercial sites, delivered at scale without compromising on quality."
       heroImg="/header-multi-unit.webp"
-      intro="Multi-unit developments present unique landscaping challenges — shared spaces, multiple boundaries, consistent finishes across units and tight construction timelines. Greenworx works alongside developers, builders and project managers to deliver landscaping that meets council and resource consent requirements, looks great from day one, and is built to handle the wear of shared use. From communal courtyards and shared driveways to private courtyards for individual units, we manage every aspect of the landscape package — design, construction, planting and retaining — as a coordinated package that's delivered on time and to specification."
+      intro="Multi-unit developments present unique landscaping challenges: shared spaces, multiple boundaries, consistent finishes across units and tight construction timelines. Greenworx works alongside developers, builders and project managers to deliver landscaping that meets council and resource consent requirements, looks great from day one, and is built to handle the wear of shared use. From communal courtyards and shared driveways to private courtyards for individual units, we manage every aspect of the landscape package, design, construction, planting and retaining, as a coordinated package that's delivered on time and to specification."
       includes={[
         "Landscape design for resource consent and council approval",
         "Shared and communal outdoor space design",
