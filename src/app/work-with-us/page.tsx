@@ -265,7 +265,7 @@ export default function WorkWithUsPage() {
                   </div>
                   <div>
                     <p className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-1">Phone</p>
-                    <a href="tel:0226482252" className="text-[#1B4332] hover:text-[#7DC143] font-medium text-sm transition-colors">022 648 2252</a>
+                    <a href="tel:+64212799679" className="text-[#1B4332] hover:text-[#7DC143] font-medium text-sm transition-colors">+64 21 279 9679</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -276,7 +276,7 @@ export default function WorkWithUsPage() {
                   </div>
                   <div>
                     <p className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-1">Email</p>
-                    <a href="mailto:devon@greenworx.co.nz" className="text-[#1B4332] hover:text-[#7DC143] font-medium text-sm transition-colors">devon@greenworx.co.nz</a>
+                    <a href="mailto:hello@greenworx.co.nz" className="text-[#1B4332] hover:text-[#7DC143] font-medium text-sm transition-colors">hello@greenworx.co.nz</a>
                   </div>
                 </div>
               </div>

@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 const LAST_UPDATED = "6 June 2026";
 const COMPANY = "Greenworx Landscaping";
-const EMAIL = "devon@greenworx.co.nz";
-const PHONE = "022 648 2252";
+const EMAIL = "hello@greenworx.co.nz";
+const PHONE = "+64 21 279 9679";
 const ADDRESS = "Unit 2, 49 Mt Wellington Highway, Auckland";
 const WEBSITE = "https://greenworx.co.nz";
 

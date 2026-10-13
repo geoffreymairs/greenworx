@@ -75,8 +75,8 @@ export default function RootLayout({
               "@type": "LocalBusiness",
               name: "Greenworx Landscaping",
               image: "https://www.greenworx.co.nz/logo.png",
-              telephone: "022 648 2252",
-              email: "devon@greenworx.co.nz",
+              telephone: "+64 21 279 9679",
+              email: "hello@greenworx.co.nz",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Unit 2, 49 Mt Wellington Highway",

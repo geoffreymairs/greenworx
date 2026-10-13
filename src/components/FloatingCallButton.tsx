@@ -3,7 +3,7 @@
 export default function FloatingCallButton() {
   return (
     <a
-      href="tel:0226482252"
+      href="tel:+64212799679"
       className="fixed bottom-6 right-6 z-50 lg:hidden bg-lime hover:bg-lime-dark text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg transition-colors"
       aria-label="Call Greenworx"
     >
