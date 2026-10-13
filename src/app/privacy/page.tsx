@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const LAST_UPDATED = "6 June 2026";
 const COMPANY = "Greenworx Landscaping";
 const EMAIL = "hello@greenworx.co.nz";
-const PHONE = "+64 21 279 9679";
+const PHONE = "021 279 9679";
 const ADDRESS = "Unit 2, 49 Mt Wellington Highway, Auckland";
 const WEBSITE = "https://greenworx.co.nz";
 
@@ -48,7 +48,7 @@ export default function PrivacyPolicyPage() {
               <address className="not-italic mt-3 text-gray-600 text-sm">
                 <strong>{COMPANY}</strong><br />
                 {ADDRESS}<br />
-                Phone: <a href={`tel:${PHONE.replace(/\s/g, "")}`} className="text-[#7DC143] hover:text-[#5E9A30]">{PHONE}</a><br />
+                Phone: <a href="tel:+64212799679" className="text-[#7DC143] hover:text-[#5E9A30]">{PHONE}</a><br />
                 Email: <a href={`mailto:${EMAIL}`} className="text-[#7DC143] hover:text-[#5E9A30]">{EMAIL}</a>
               </address>
             </PolicySection>
@@ -235,7 +235,7 @@ export default function PrivacyPolicyPage() {
               <address className="not-italic mt-3 text-gray-600 text-sm">
                 <strong>{COMPANY}</strong><br />
                 {ADDRESS}<br />
-                Phone: <a href={`tel:${PHONE.replace(/\s/g, "")}`} className="text-[#7DC143] hover:text-[#5E9A30]">{PHONE}</a><br />
+                Phone: <a href="tel:+64212799679" className="text-[#7DC143] hover:text-[#5E9A30]">{PHONE}</a><br />
                 Email: <a href={`mailto:${EMAIL}`} className="text-[#7DC143] hover:text-[#5E9A30]">{EMAIL}</a>
               </address>
             </PolicySection>

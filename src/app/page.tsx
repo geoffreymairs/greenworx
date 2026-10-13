@@ -479,7 +479,7 @@ export default function HomePage() {
               href="tel:+64212799679"
               className="inline-flex items-center gap-2 border-2 border-white text-white font-semibold px-8 py-4 rounded-sm hover:bg-white hover:text-[#1B4332] transition-all duration-300 tracking-wide text-sm uppercase"
             >
-              Call +64 21 279 9679
+              Call 021 279 9679
             </a>
           </div>
         </div>

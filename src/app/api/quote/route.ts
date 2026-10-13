@@ -229,7 +229,7 @@ function confirmationHtml(name: string, address: string, details: string) {
           <tr>
             <td style="padding-right:32px;padding-bottom:8px">
               <p style="margin:0 0 2px;font-family:Arial,sans-serif;font-size:11px;color:#999">Phone</p>
-              <a href="tel:+64212799679" style="font-family:Arial,sans-serif;font-size:14px;font-weight:600;color:#1B4332;text-decoration:none">+64 21 279 9679</a>
+              <a href="tel:+64212799679" style="font-family:Arial,sans-serif;font-size:14px;font-weight:600;color:#1B4332;text-decoration:none">021 279 9679</a>
             </td>
             <td style="padding-bottom:8px">
               <p style="margin:0 0 2px;font-family:Arial,sans-serif;font-size:11px;color:#999">Email</p>
