@@ -203,7 +203,7 @@ export default function HomePage() {
             </h1>
             <p className="text-white/75 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
               Landscape design, construction and garden maintenance for Auckland homes and businesses.
-              Setting new standards: landscapes that work.
+              Setting new standards - landscapes that work.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
