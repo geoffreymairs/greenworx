@@ -441,7 +441,7 @@ export async function POST(req: Request) {
       resend.emails.send({
         from:    FROM,
         to:      email,
-        replyTo: DEVON,
+        replyTo: "hello@greenworx.co.nz",
         subject: "We've received your enquiry — Greenworx Landscaping",
         html:    confirmationHtml(name, address, details),
       }),
