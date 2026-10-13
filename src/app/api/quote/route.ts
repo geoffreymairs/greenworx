@@ -149,7 +149,7 @@ function confirmationHtml(name: string, address: string, details: string) {
           </td></tr>
         </table>
         <h1 style="margin:0 0 10px;font-family:Georgia,serif;font-size:28px;font-weight:700;color:white;line-height:1.2">Thank you, ${firstName}.</h1>
-        <p style="margin:0;font-family:Arial,sans-serif;font-size:15px;color:rgba(255,255,255,0.65);line-height:1.6">We&rsquo;ve received your enquiry and will be in touch within one business day.</p>
+        <p style="margin:0;font-family:Arial,sans-serif;font-size:15px;color:rgba(255,255,255,0.65);line-height:1.6">We&rsquo;ve received your enquiry. We will contact you within 24 hours.</p>
       </td></tr>
 
       <!-- Divider accent -->
@@ -161,7 +161,7 @@ function confirmationHtml(name: string, address: string, details: string) {
           Hi ${firstName},
         </p>
         <p style="margin:0 0 20px;font-family:Arial,sans-serif;font-size:15px;color:#444;line-height:1.75">
-          Thank you for reaching out to Greenworx. We&rsquo;ve received your quote request and Devon will personally review your project and be in touch within one business day.
+          Thank you for reaching out to Greenworx. We&rsquo;ve received your quote request and will review your project details. We will contact you within 24 hours.
         </p>
         <p style="margin:0 0 32px;font-family:Arial,sans-serif;font-size:15px;color:#444;line-height:1.75">
           In the meantime, if you have any urgent questions or would prefer to speak directly, feel free to call or email us.
@@ -176,7 +176,7 @@ function confirmationHtml(name: string, address: string, details: string) {
                 <div style="width:32px;height:32px;background:#1B4332;border-radius:3px;text-align:center;line-height:32px;font-family:Georgia,serif;font-size:13px;font-weight:700;color:#7DC143">01</div>
               </td>
               <td valign="top" style="padding-bottom:18px;padding-left:8px">
-                <p style="margin:0 0 3px;font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:#1B4332">Devon Reviews Your Enquiry</p>
+                <p style="margin:0 0 3px;font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:#1B4332">We Review Your Enquiry</p>
                 <p style="margin:0;font-family:Arial,sans-serif;font-size:13px;color:#666;line-height:1.5">We&rsquo;ll take a look at your project details and any specific requirements.</p>
               </td>
             </tr>
@@ -186,7 +186,7 @@ function confirmationHtml(name: string, address: string, details: string) {
               </td>
               <td valign="top" style="padding-bottom:18px;padding-left:8px">
                 <p style="margin:0 0 3px;font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:#1B4332">We&rsquo;ll Be in Touch</p>
-                <p style="margin:0;font-family:Arial,sans-serif;font-size:13px;color:#666;line-height:1.5">Devon will contact you within one business day to discuss your project.</p>
+                <p style="margin:0;font-family:Arial,sans-serif;font-size:13px;color:#666;line-height:1.5">We will contact you within 24 hours.</p>
               </td>
             </tr>
             <tr>
@@ -229,11 +229,11 @@ function confirmationHtml(name: string, address: string, details: string) {
           <tr>
             <td style="padding-right:32px;padding-bottom:8px">
               <p style="margin:0 0 2px;font-family:Arial,sans-serif;font-size:11px;color:#999">Phone</p>
-              <a href="tel:0226482252" style="font-family:Arial,sans-serif;font-size:14px;font-weight:600;color:#1B4332;text-decoration:none">022 648 2252</a>
+              <a href="tel:+64212799679" style="font-family:Arial,sans-serif;font-size:14px;font-weight:600;color:#1B4332;text-decoration:none">+64 21 279 9679</a>
             </td>
             <td style="padding-bottom:8px">
               <p style="margin:0 0 2px;font-family:Arial,sans-serif;font-size:11px;color:#999">Email</p>
-              <a href="mailto:devon@greenworx.co.nz" style="font-family:Arial,sans-serif;font-size:14px;font-weight:600;color:#7DC143;text-decoration:none">devon@greenworx.co.nz</a>
+              <a href="mailto:hello@greenworx.co.nz" style="font-family:Arial,sans-serif;font-size:14px;font-weight:600;color:#7DC143;text-decoration:none">hello@greenworx.co.nz</a>
             </td>
           </tr>
         </table>
