@@ -7,6 +7,7 @@ import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FloatingCallButton from "@/components/FloatingCallButton";
+import PhoneClickTracker from "@/components/PhoneClickTracker";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -116,6 +117,7 @@ export default function RootLayout({
         <main className="flex-grow">{children}</main>
         <Footer />
         <FloatingCallButton />
+        <PhoneClickTracker />
       </body>
       <GoogleAnalytics gaId="G-8GCDDCY1E1" />
       <Script
