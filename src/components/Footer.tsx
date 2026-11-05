@@ -36,20 +36,35 @@ export default function Footer() {
               Premium landscaping design, construction and maintenance for Auckland&apos;s finest homes and businesses.
             </p>
             <p className="text-lime text-xs font-semibold tracking-widest uppercase">Excellence is in the details.</p>
-            <a
-              href="https://www.facebook.com/greenworxauckland"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Greenworx on Facebook (opens in a new tab)"
-              className="mt-6 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/70 hover:text-lime hover:border-lime transition-colors"
-            >
+  <div className="mt-6 flex items-center gap-3">
+  <a
+  href="https://www.facebook.com/greenworxauckland"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Greenworx on Facebook (opens in a new tab)"
+  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/70 hover:text-lime hover:border-lime transition-colors"
+  >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.026 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971H15.83c-1.491 0-1.956.93-1.956 1.886v2.264h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" />
-              </svg>
-            </a>
-          </div>
-
-          {/* Services */}
+  </svg>
+  </a>
+  <a
+  href="https://www.instagram.com/greenworx_nz"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Greenworx on Instagram (opens in a new tab)"
+  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/70 hover:text-lime hover:border-lime transition-colors"
+  >
+  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+  <circle cx="12" cy="12" r="4" />
+  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+  </a>
+  </div>
+  </div>
+  
+  {/* Services */}
           <div>
             <h4 className="text-white font-semibold text-sm tracking-widest uppercase mb-5">Services</h4>
             <ul className="space-y-2">
