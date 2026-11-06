@@ -15,11 +15,11 @@ import { leadEmailHtml, type Lead } from "@/lib/metaLeadEmail";
 //   META_PAGE_ACCESS_TOKEN  long-lived Page or system user token with leads_retrieval for the Greenworx Page
 //   RESEND_API_KEY          already set for the website forms
 // Optional:
-//   META_GRAPH_VERSION      defaults to v23.0
+//   META_GRAPH_VERSION      defaults to v27.0
 
 const INBOX = "hello@greenworx.co.nz";
 const FROM = "Greenworx Landscaping <noreply@greenworx.co.nz>";
-const GRAPH_VERSION = process.env.META_GRAPH_VERSION || "v23.0";
+const GRAPH_VERSION = process.env.META_GRAPH_VERSION || "v27.0";
 
 export const runtime = "nodejs";
 
