@@ -72,21 +72,28 @@ async function fetchLead(leadId: string, token: string): Promise<Lead> {
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const mode = url.searchParams.get("hub.mode");
-  const token = url.searchParams.get("hub.verify_token");
+  const token = (url.searchParams.get("hub.verify_token") ?? "").trim();
   const challenge = url.searchParams.get("hub.challenge");
-  const expected = process.env.META_VERIFY_TOKEN;
+  // Trim so a stray space or newline pasted into Vercel doesn't break the match.
+  const expected = (process.env.META_VERIFY_TOKEN ?? "").trim();
 
   if (mode === "subscribe" && expected && token === expected && challenge) {
+    console.log("[MetaLeads] Webhook verified");
     return new Response(challenge, { status: 200, headers: { "Content-Type": "text/plain" } });
   }
+  // Log why it failed without revealing either token.
+  console.warn(
+    `[MetaLeads] Verify failed: mode=${mode} hasChallenge=${!!challenge} ` +
+    `envSet=${!!expected} envLen=${expected.length} receivedLen=${token.length} match=${token === expected}`,
+  );
   return new Response("Forbidden", { status: 403 });
 }
 
 // ─── POST: new lead events ────────────────────────────────────────────────────
 
 export async function POST(req: Request) {
-  const appSecret = process.env.META_APP_SECRET;
-  const pageToken = process.env.META_PAGE_ACCESS_TOKEN;
+  const appSecret = process.env.META_APP_SECRET?.trim();
+  const pageToken = process.env.META_PAGE_ACCESS_TOKEN?.trim();
   const resendKey = process.env.RESEND_API_KEY;
 
   if (!appSecret || !pageToken || !resendKey) {
