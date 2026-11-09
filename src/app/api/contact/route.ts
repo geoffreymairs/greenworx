@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { put } from "@vercel/blob";
 import { Resend } from "resend";
 import type { VerifiedAddress } from "@/lib/address";
+import { parseBudget, withBudget } from "@/lib/budget";
 import {
   runSpamChecks,
   getClientIp,
@@ -362,6 +363,11 @@ export async function POST(req: Request) {
     if (!addressPlaceId) {
       return NextResponse.json({ error: "Please select your property address from the Google suggestions." }, { status: 400 });
     }
+    const budget = parseBudget(formData.get("budget"));
+    if (!budget) {
+      return NextResponse.json({ error: "Please select your budget." }, { status: 400 });
+    }
+    const detailsWithBudget = withBudget(budget, details);
     const verifiedAddressDetails = [
       addressStreet && `Street: ${addressStreet}`,
       addressSuburb && `Suburb: ${addressSuburb}`,
@@ -435,7 +441,7 @@ export async function POST(req: Request) {
         to:          INBOX,
         replyTo:     email,
         subject:     `New Quote Request: ${name}`,
-        html:        devonHtml(name, phone, email, address, `${details}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`, photoLinks),
+        html:        devonHtml(name, phone, email, address, `${detailsWithBudget}\n\nVerified address: ${verifiedAddressDetails}`, photoLinks),
         attachments: attachments.map(({ filename, content }) => ({ filename, content })),
       }),
       resend.emails.send({
@@ -443,7 +449,7 @@ export async function POST(req: Request) {
         to:      email,
         replyTo: "hello@greenworx.co.nz",
         subject: "We've received your enquiry | Greenworx Landscaping",
-        html:    confirmationHtml(name, address, details),
+        html:    confirmationHtml(name, address, detailsWithBudget),
       }),
     ]);
 
@@ -479,7 +485,7 @@ export async function POST(req: Request) {
       country: sanitizeField(formData.get("addressCountry")?.toString() ?? "", 100),
       streetAddress: addressStreet,
     },
-    `${details}${details ? "\n\n" : ""}Verified address: ${verifiedAddressDetails}`,
+    `${detailsWithBudget}\n\nVerified address: ${verifiedAddressDetails}`,
     photoLinks,
     attachments
   );
