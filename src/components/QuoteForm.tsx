@@ -6,6 +6,7 @@ import { trackLeadConversion } from "@/lib/gtag";
 import { useAntiSpam } from "@/lib/useAntiSpam";
 import HoneypotField from "@/components/HoneypotField";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
+import BudgetSelect from "@/components/BudgetSelect";
 import { EMPTY_VERIFIED_ADDRESS, serializeVerifiedAddress, type VerifiedAddress } from "@/lib/address";
 
 export default function QuoteForm({ dark = false }: { dark?: boolean }) {
@@ -20,6 +21,7 @@ export default function QuoteForm({ dark = false }: { dark?: boolean }) {
   const [address, setAddress] = useState("");
   const [verifiedAddress, setVerifiedAddress] = useState<VerifiedAddress>(EMPTY_VERIFIED_ADDRESS);
   const [details, setDetails] = useState("");
+  const [budget, setBudget]   = useState("");
 
   const inputClass = `w-full px-4 py-3 rounded-sm border text-sm outline-none transition-colors ${
     dark
@@ -48,6 +50,7 @@ export default function QuoteForm({ dark = false }: { dark?: boolean }) {
           phone,
           email,
           details,
+          budget,
           company: honeypot,
           elapsedMs: getElapsedMs(),
           ...serializeVerifiedAddress(verifiedAddress),
@@ -99,6 +102,7 @@ export default function QuoteForm({ dark = false }: { dark?: boolean }) {
           dark={dark}
         />
       </div>
+      <BudgetSelect value={budget} onChange={setBudget} inputClass={inputClass} labelClass={labelClass} dark={dark} />
       <div>
         <label className={labelClass}>Project Details</label>
         <textarea

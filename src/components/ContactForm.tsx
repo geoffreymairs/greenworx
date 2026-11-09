@@ -6,6 +6,7 @@ import { trackLeadConversion } from "@/lib/gtag";
 import { useAntiSpam } from "@/lib/useAntiSpam";
 import HoneypotField from "@/components/HoneypotField";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
+import BudgetSelect from "@/components/BudgetSelect";
 import { EMPTY_VERIFIED_ADDRESS, serializeVerifiedAddress, type VerifiedAddress } from "@/lib/address";
 import { compressImage } from "@/lib/compressImage";
 
@@ -39,6 +40,7 @@ export default function ContactForm() {
   const [address, setAddress] = useState("");
   const [verifiedAddress, setVerifiedAddress] = useState<VerifiedAddress>(EMPTY_VERIFIED_ADDRESS);
   const [details, setDetails] = useState("");
+  const [budget, setBudget]   = useState("");
   const [photos, setPhotos]   = useState<PhotoFile[]>([]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -138,6 +140,7 @@ export default function ContactForm() {
         if (value !== null) fd.append(key, String(value));
       });
       fd.append("details", details);
+      fd.append("budget",  budget);
       fd.append("company", honeypot);
       fd.append("elapsedMs", String(getElapsedMs()));
       photos.forEach(({ file }) => fd.append("photos", file));
@@ -206,6 +209,8 @@ export default function ContactForm() {
           required
         />
       </div>
+
+      <BudgetSelect value={budget} onChange={setBudget} inputClass={inputClass} labelClass={labelClass} />
 
       {/* Project Details */}
       <div>
